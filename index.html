@@ -665,13 +665,11 @@ body.paging #desk{transform:none;opacity:.55}
 
 /* ---------- desktop, a bit more personal: brand wallpaper + widgets + lime folders ---------- */
 #mono{display:none}
-#hero{position:absolute;left:43%;top:44%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;user-select:none}
-#hero::before{content:"";position:absolute;left:50%;top:50%;width:150%;height:220%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(210,245,91,.12),transparent 70%);z-index:-1}
-.hero-word{font-weight:800;font-size:clamp(72px,12vw,200px);line-height:.9;letter-spacing:-.065em;
-  background:linear-gradient(180deg,#FFFFFF 0%,#C9D0DE 38%,#7E889E 52%,#E7EBF3 64%,#9AA3B6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 10px 30px rgba(0,0,0,.35))}
-.hero-sub{margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.42em;color:rgba(255,255,255,.55)}
-.hero-sub b{color:var(--acid);font-weight:500}
+/* name sits low on the wallpaper, plain white */
+#hero{position:absolute;left:43%;bottom:7vh;transform:translateX(-50%);text-align:center;pointer-events:none;user-select:none}
+.hero-word{font-weight:800;font-size:clamp(72px,12vw,200px);line-height:.9;letter-spacing:-.065em;color:#FFFFFF;text-shadow:0 10px 30px rgba(0,0,0,.3)}
+.hero-sub{margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.42em;color:rgba(255,255,255,.7)}
+.hero-sub b{color:#FFFFFF;font-weight:500}
 /* widgets (right column) */
 #wdgs{position:absolute;right:22px;top:22px;width:290px;display:flex;flex-direction:column;gap:12px;z-index:3}
 .wdg{border-radius:20px;background:rgba(18,22,38,.55);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(26px) saturate(1.3);-webkit-backdrop-filter:blur(26px) saturate(1.3);padding:16px 18px;box-shadow:0 14px 40px rgba(0,0,0,.25)}
@@ -699,7 +697,7 @@ body.paging #desk{transform:none;opacity:.55}
 .wdg-np button svg{width:16px;height:16px}
 @media (max-width:1100px){ #hero{left:50%} #wdgs{display:none} }
 @media (max-width:640px){
-  #hero{top:58%} .hero-sub{letter-spacing:.25em;font-size:10px}
+  #hero{bottom:96px} .hero-sub{letter-spacing:.25em;font-size:10px}
   /* phone taskbar: start + a few apps only (folders are already on the home screen) */
   .tb-btn[data-id="p1"],.tb-btn[data-id="p2"],.tb-btn[data-id="p3"],.tb-btn[data-id="taste"]{display:none}
   .tb-center{gap:2px}
