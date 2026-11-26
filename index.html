@@ -679,6 +679,36 @@ body.paging #desk{transform:none;opacity:.55}
   .ex-head .acts .xbtn:not(.pri):not([data-empty]){display:none}
 }
 
+/* ---------- me.exe: profile app, photo first ---------- */
+.pf{display:grid;grid-template-columns:minmax(300px,42%) minmax(0,1fr);min-height:100%}
+.pf-photo{position:sticky;top:0;align-self:start;padding:22px;display:flex;flex-direction:column;gap:12px;max-height:100%}
+.pf-main{width:100%;aspect-ratio:4/5;max-height:calc(100vh - 340px);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#1E2335,#131722);border:1px solid rgba(255,255,255,.09);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.pf-main img{width:100%;height:100%;object-fit:cover;display:block}
+.pf-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(242,239,232,.3);text-align:center;padding:20px}
+.pf-ph svg{width:30%;max-width:120px}
+.pf-ph b{font-family:var(--mono);font-weight:400;font-size:12px;color:rgba(242,239,232,.6)}
+.pf-ph span{font-family:var(--kr);font-size:12px}
+.pf-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pf-thumbs button{aspect-ratio:1;border-radius:9px;overflow:hidden;background:#171B27;border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;font-family:var(--mono);font-size:11px;color:var(--dim);transition:border-color .15s,transform .15s}
+.pf-thumbs button:hover{transform:translateY(-2px)}
+.pf-thumbs button.on{border:2px solid var(--acid)}
+.pf-thumbs img{width:100%;height:100%;object-fit:cover}
+.pf-cap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.pf-info{padding:30px 28px 40px 6px;min-width:0}
+.pf-eyebrow{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--acid)}
+.pf-eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acid);box-shadow:0 0 10px var(--acid)}
+.pf-info h1{margin-top:12px;font-weight:800;font-size:clamp(40px,4.6vw,64px);letter-spacing:-.05em;line-height:.95}
+.pf-info h1 span{font-weight:400;font-size:.42em;letter-spacing:-.02em;color:var(--dim);vertical-align:middle}
+.pf-one{margin-top:12px;font-family:var(--kr);font-size:16px;line-height:1.6;color:rgba(242,239,232,.85)}
+.pf-info .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.pf-info .set-g{margin-top:24px}
+@media (max-width:860px){
+  .pf{grid-template-columns:1fr}
+  .pf-photo{position:static;padding:14px 14px 0}
+  .pf-main{max-height:none}
+  .pf-info{padding:20px 14px 32px}
+}
+
 /* ---------- explorer folder view (Windows-style command bar + details list) ---------- */
 .xp{position:relative;display:flex;flex-direction:column;height:100%;min-height:0;font-family:var(--sans)}
 .w-main:has(.xp){overflow:hidden}
@@ -1335,32 +1365,49 @@ function mountExplorer(root, it){
   draw();
 }
 
+/* =====================================================================
+   PROFILE PHOTOS (me.exe) — put image file names here, e.g. "me.jpg"
+   (upload the image next to index.html). empty "" = placeholder box
+   ===================================================================== */
+const ME = {
+  photos: ["", "", "", ""],
+  names:  ["profile_01.jpg", "profile_02.jpg", "profile_03.jpg", "profile_04.jpg"]
+};
+const photoBox = (src, label, i) => src
+  ? `<img src="${src}" alt="프로필 사진 ${i+1}">`
+  : `<div class="pf-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="9" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><b>[${label} ${String(i+1).padStart(2,"0")}]</b><span>사진을 넣으면 여기에 크게 보여요</span></div>`;
+
 const setRow = (ic, label, val, sub="") =>
   `<div class="set-row"><span class="ic">${GL[ic]}</span><div class="lb">${label}${sub ? `<small>${sub}</small>` : ""}</div><span class="vl">${val}</span></div>`;
 
 const ITEMS = [
-  /* me.exe — a "settings / account" style app */
+  /* me.exe — profile app: big photo on the left, info on the right */
   { id:"me", name:"me.exe", tile:tileOf("me"), c:"#D6FF3D", path:"~/me.exe",
-    page:()=>`<div class="set">
-      <div class="acct"><div class="av">JB</div><div><h2>JUNGBIN <span>[이름]</span></h2><p>[나를 한 줄로 소개하는 문장]</p>
-        <div class="tags"><span class="tagx on">● 작업 중</span><span class="tagx">[역할]</span><span class="tagx">[지역], KR</span><span class="tagx">Portfolio 2026</span></div></div>
-        <div class="acct-ph">[PROFILE PHOTO]</div></div>
-      <div class="set-2">
+    page:()=>`<div class="pf">
+      <aside class="pf-photo">
+        <div class="pf-main" data-pf-main>${photoBox(ME.photos[0], "PROFILE PHOTO", 0)}</div>
+        <div class="pf-thumbs">${ME.photos.map((src,i)=>`<button data-pf="${i}" class="${i ? "" : "on"}">${src ? `<img src="${src}" alt="" loading="lazy">` : `<span>${String(i+1).padStart(2,"0")}</span>`}</button>`).join("")}</div>
+        <div class="pf-cap"><span data-pf-name>${ME.names[0]}</span><span>4:5 권장 · 1600×2000</span></div>
+      </aside>
+      <section class="pf-info">
+        <p class="pf-eyebrow"><i></i>작업 중 · PORTFOLIO 2026</p>
+        <h1>JUNGBIN <span>[이름]</span></h1>
+        <p class="pf-one">[나를 한 줄로 소개하는 문장]</p>
+        <div class="tags"><span class="tagx on">[역할]</span><span class="tagx">[지역], KR</span><span class="tagx">[학교 / 전공]</span></div>
+
         <div class="set-g"><h4>기본 정보</h4><div class="set-rows">
           ${setRow("user","이름","[이름 / NAME]")}${setRow("cal","태어난 해","[YYYY]")}${setRow("geo","지역","[지역], KR")}${setRow("cap","학교 · 전공","[학교 / 전공]")}${setRow("bolt","지금 상태","[지금 상태]")}
         </div></div>
         <div class="set-g"><h4>나를 이루는 키워드</h4><div class="set-rows">
           ${[1,2,3].map(i=>setRow("star",`[키워드 ${i}]`,"","[이 키워드를 보여주는 한 줄]")).join("")}
         </div></div>
-      </div>
-      <div class="set-2">
         <div class="set-g"><h4>스킬 & 툴</h4><div class="set-rows">
           ${[["[툴 1]",90],["[툴 2]",80],["[툴 3]",70],["[툴 4]",60],["[툴 5]",50]].map(([t,v])=>`<div class="set-row"><span class="ic">${GL.tool}</span><div class="lb">${t}</div><span class="bar"><i style="width:${v}%"></i></span><span class="vl" style="width:34px;text-align:right">${v}</span></div>`).join("")}
         </div></div>
         <div class="set-g"><h4>타임라인</h4><div class="set-rows">
           ${[["[YYYY]","[학교 / 전공]","학력"],["[YYYY]","[경험 / 활동]","경험"],["[YYYY]","[수상 / 전시]","수상"],["[YYYY]","[수상 / 전시]","전시"]].map(([y,t,d])=>`<div class="set-row"><span class="ic yr">${y}</span><div class="lb">${t}</div><span class="vl">${d}</span></div>`).join("")}
         </div></div>
-      </div></div>`},
+      </section></div>`},
 
   /* about_me.txt — opens in a notepad */
   { id:"about", name:"about_me.txt", tile:tileOf("about"), c:"#F3F3F1", path:"~/about_me.txt",
@@ -1667,6 +1714,13 @@ function render(it){
   page.querySelector("[data-min]").onclick = ()=> history.back();
   const xp = page.querySelector(".xp");
   if (xp) mountExplorer(xp, it);
+  // me.exe: thumbnails swap the big photo
+  page.querySelectorAll("[data-pf]").forEach(b=> b.onclick = ()=>{
+    const i = +b.dataset.pf;
+    page.querySelectorAll("[data-pf]").forEach(x=> x.classList.toggle("on", x === b));
+    page.querySelector("[data-pf-main]").innerHTML = photoBox(ME.photos[i], "PROFILE PHOTO", i);
+    page.querySelector("[data-pf-name]").textContent = ME.names[i];
+  });
   page.querySelector("[data-up]").onclick = ()=>{ if (xp && xp._up()) return; history.back(); };
   page.querySelector("[data-max]").onclick = toggleMax;
   page.querySelector("[data-titlebar]").ondblclick = e=>{ if (!e.target.closest("button")) toggleMax(); };
