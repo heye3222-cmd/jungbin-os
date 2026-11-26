@@ -858,7 +858,7 @@ body.paging #desk{transform:none;opacity:.55}
 }
 /* ---------- 자기소개 post-its: two flat sticky notes, straight and side by side ---------- */
 #memo{position:absolute;left:128px;top:24px;z-index:4;display:flex;gap:14px;align-items:stretch;animation:iconfade .5s ease both}
-.pit{position:relative;width:318px;display:flex;flex-direction:column;color:#111;font-family:var(--kr);
+.pit{position:relative;width:660px;display:flex;flex-direction:column;color:#111;font-family:var(--kr);
   background:#F3F3F0;border-radius:8px;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 32px rgba(0,0,0,.4)}
 #memo.drag .pit{box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 20px 44px rgba(0,0,0,.5)}
 .note-bar{display:flex;align-items:center;height:30px;padding:0 4px;background:#E6E6E2;cursor:grab;user-select:none;touch-action:none;flex:none}
@@ -868,7 +868,9 @@ body.paging #desk{transform:none;opacity:.55}
 .note-bar svg{width:11px;height:11px}
 .note-bar .sp{flex:1}
 #memo.min .note-tx{display:none}
-.note-tx{flex:1;padding:16px 20px 20px;font-size:13px;line-height:1.65;user-select:text}
+.note-tx{flex:1;display:grid;grid-template-columns:1fr 1fr;font-size:13px;line-height:1.65;user-select:text}
+.nt-col{padding:16px 22px 20px;min-width:0}
+.nt-col+.nt-col{border-left:1px solid rgba(17,17,17,.1)}
 .note-tx h3{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.14em;color:rgba(17,17,17,.45);margin:18px 0 8px}
 .note-tx h3:first-child{margin-top:0}
 .note-tx h2{font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.2}
@@ -882,10 +884,12 @@ body.paging #desk{transform:none;opacity:.55}
 .note-tx li em{display:block;font-style:normal;font-size:12.5px;color:rgba(17,17,17,.62);line-height:1.5}
 .lite #memo{animation:none}
 @media (max-width:640px){
-  #memo{left:0 !important;top:226px !important;right:0;bottom:8px;padding:4px 12px 14px;flex-direction:column;gap:10px;overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:stretch}
+  #memo{left:0 !important;top:122px !important;right:0;bottom:8px;padding:4px 12px 14px;flex-direction:column;gap:10px;overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:stretch}
   .pit{width:auto;flex:none}
   .note-bar{cursor:default}
-  .note-tx{padding:12px 16px 14px;font-size:12.5px;line-height:1.6}
+  .note-tx{grid-template-columns:1fr;font-size:12.5px;line-height:1.6}
+  .nt-col{padding:12px 16px 14px}
+  .nt-col+.nt-col{border-left:0;border-top:1px solid rgba(17,17,17,.1)}
   .note-tx h2{font-size:19px}
   .note-tx h3{margin:12px 0 6px}
   .note-tx dl{margin-top:10px;padding-top:10px}
@@ -933,6 +937,8 @@ body.paging #desk{transform:none;opacity:.55}
 .cs-g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 16px;align-items:start}
 .cs-grp+.cs-grp{margin-top:48px}
 .cs-posters{max-width:900px;align-items:start}
+.cs-grp-d{margin:-6px 0 18px;font-size:13.5px;color:rgba(255,255,255,.6)}
+.cs-cat{align-items:start}
 @media (max-width:760px){ .cs-g2.cs-posters{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px} .cs-posters figcaption span{display:none} }
 .cs-end{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
 .cs-btn{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 20px;border-radius:999px;background:#F2F2F2;color:#000;font-size:14px;font-weight:600}
@@ -1036,7 +1042,6 @@ body{touch-action:manipulation}
   <div id="hero" aria-hidden="true"><div class="hero-word">JUNGBIN</div><div class="hero-sub">PORTFOLIO <b>✦</b> EDITION 2026</div></div>
   <section id="memo" aria-label="자기소개 포스트잇">
     <article class="pit" id="note1"><div class="note-bar"><button aria-label="새 메모"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.4"/></svg></button><span class="sp"></span><button aria-label="메뉴"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="2" cy="6" r="1.1"/><circle cx="6" cy="6" r="1.1"/><circle cx="10" cy="6" r="1.1"/></svg></button><button data-m aria-label="접기"><svg viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="currentColor" stroke-width="1.4"/></svg></button></div><div class="note-tx" id="note1tx"></div></article>
-    <article class="pit" id="note2"><div class="note-bar"><button aria-label="새 메모"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.4"/></svg></button><span class="sp"></span><button aria-label="메뉴"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="2" cy="6" r="1.1"/><circle cx="6" cy="6" r="1.1"/><circle cx="10" cy="6" r="1.1"/></svg></button><button data-m aria-label="접기"><svg viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="currentColor" stroke-width="1.4"/></svg></button></div><div class="note-tx" id="note2tx"></div></article>
   </section>
   <div id="wdgs">
     <section class="wdg"><div class="wc-t" id="wct">--:--</div><div class="wc-d" id="wcd"></div><div class="wc-f"><span>JUNGBIN OS</span><span><b>●</b> online</span></div></section>
@@ -1088,8 +1093,7 @@ body{touch-action:manipulation}
     <h5>추천 <span>recommended</span></h5>
     <div class="recs">
       <button class="rec" data-go="p1"><i>01</i><div><b>UNDER CONTROL</b><span>project_01 · PFA 리브랜딩</span></div></button>
-      <button class="rec" data-go="trash"><i>bin</i><div><b>버린 시안들</b><span>휴지통</span></div></button>
-      <button class="rec" data-go="mail"><i>@</i><div><b>연락하기</b><span>contact</span></div></button>
+      <button class="rec" data-go="music"><i>fm</i><div><b>JB.fm</b><span>음악 듣기</span></div></button>
     </div>
   </div>
   <div class="foot">
@@ -1372,9 +1376,12 @@ function caseP1(){
       <div class="cs-h">02<b>Catalog</b></div>
       <p class="cs-txt rv">도록에서 제가 맡은 페이지들. 픽토그램과 안내체계, 업무 인쇄물, 산업현장 적용까지 브랜드가 실제 공간과 사물 위에서 어떻게 보이는지 펼쳤습니다.</p>
       <div class="cs-full">
-        ${[["픽토그램과 안내체계","PICTOGRAM",pict],["업무 인쇄물","OFFICE",office],["산업현장 적용","INDUSTRY",ind]].map(([ko,en,list])=>
+        ${[["픽토그램과 안내체계","PICTOGRAM",pict,"로고의 막대 형태에서 출발한 픽토그램과, 그것이 현장 안내 사인으로 이어지는 체계"],
+           ["업무 인쇄물","OFFICE",office,"명함 · 레터헤드 · 봉투 · 회사 소개서까지, 사무 현장에서 쓰이는 인쇄물"],
+           ["산업현장 적용","INDUSTRY",ind,"트레일러 · 박스 · 가림막 · 사인 등 실제 산업 현장 위에 올린 브랜드"]].map(([ko,en,list,desc])=>
           `<div class="cs-grp"><h3 class="cs-sub">${ko}<span>${en} · ${list.length}</span></h3>
-           <div class="cs-stack">${list.map(x=>{ const i = spreads.indexOf(x) + 1;
+           <p class="cs-grp-d">${desc}</p>
+           <div class="cs-g2 cs-cat">${list.map(x=>{ const i = spreads.indexOf(x) + 1;
              return csFig(Object.assign({}, x, {l: `${String(i).padStart(2,"0")} / ${String(spreads.length).padStart(2,"0")}`})); }).join("")}</div></div>`).join("")}
       </div>
     </section>
@@ -1392,7 +1399,6 @@ function caseP1(){
       <div class="cs-h">04<b>Note</b></div>
       <div class="cs-end rv">
         <p class="cs-txt">[이 작업이 나에 대해 말해주는 것 — 한두 문장]</p>
-        <button class="cs-btn ghost" data-go-win="trash">버린 시안 보기 — 휴지통 ${FS.trash.kids.length}</button>
       </div>
     </section>
   </div><div class="cs-lb" aria-hidden="true"><img alt=""></div></article>`;
@@ -1649,28 +1655,9 @@ const setRow = (ic, label, val, sub="") =>
 const ITEMS = [
   { id:"p1", name:"Project_01", tile:tileOf("p1"), c:PROJECTS.p1.c, path:"~/projects/01", cs:true, page:()=>caseP1()},
 
-  /* 취향.zip — extracted folder (real explorer list) */
-  { id:"taste", name:"취향.zip", tile:tileOf("taste"), c:"#D2F55B", path:"~/취향.zip", page:()=>xpShell("taste")},
-
   { id:"music", name:"JB.fm", app:true, c:"#D6FF3D",
-    tile:tileOf("music") },
+    tile:tileOf("music") }
 
-  /* 휴지통 — real explorer list (can't be emptied) */
-  { id:"trash", name:"휴지통", tile:tileOf("trash"), c:"#FF5A5A", path:"~/trash", page:()=>xpShell("trash")},
-
-  /* Contact — a mail compose window */
-  { id:"mail", name:"Contact", tile:tileOf("mail"), c:"#D6FF3D", path:"~/contact",
-    page:()=>`<div class="mail">
-      ${exHead("mail","새 메시지","Contact · 보통 금방 답장해요", `<a class="xbtn pri" href="mailto:">보내기 →</a>`)}
-      <div class="mail-f"><span>받는 사람</span><span class="tagx on">JUNGBIN &lt;[email]&gt;</span></div>
-      <div class="mail-f"><span>제목</span><b style="font-weight:500">[같이 작업해요 / 안녕하세요]</b></div>
-      <div class="mail-b">안녕하세요, 정빈님.<br><br>[여기에 하고 싶은 말을 적어 주세요]<br><br><span style="color:var(--dim)">— 보낸 사람</span></div>
-      <p class="ex-sec" style="margin:4px 22px 10px">다른 곳에서 찾기</p>
-      <div class="mail-links">
-        <div class="lnk"><span class="ic">${GL.img}</span><div><b>Instagram</b><span>[@id]</span></div></div>
-        <div class="lnk"><span class="ic">${GL.view}</span><div><b>Behance</b><span>[link]</span></div></div>
-        <div class="lnk"><span class="ic">${GL.user}</span><div><b>Phone</b><span>[번호]</span></div></div>
-      </div></div>`}
 ];
 
 /* =====================================================================
@@ -1784,12 +1771,12 @@ Object.values(ICONS).forEach(el=>{
       const tilt = Math.max(-14, Math.min(14, (ev.clientX-lastX)*1.2)); lastX = ev.clientX;
       start.forEach(s=>{ s.el.style.left = (s.x+dx)+"px"; s.el.style.top = (s.y+dy)+"px"; s.el.style.setProperty("--tilt", tilt+"deg"); });
       const tr = overTrash(ev, group);
-      ICONS.trash.classList.toggle("target", !!tr);
+      if (ICONS.trash) ICONS.trash.classList.toggle("target", !!tr);
     };
     const up = ev=>{
       el.removeEventListener("pointermove", mv); el.removeEventListener("pointerup", up); el.removeEventListener("pointercancel", up);
       group.forEach(g=>{ g.classList.remove("dragging"); g.style.removeProperty("--tilt"); });
-      ICONS.trash.classList.remove("target");
+      if (ICONS.trash) ICONS.trash.classList.remove("target");
       if (!moved){
         const now = Date.now(), coarse = matchMedia("(pointer:coarse)").matches;
         if (!add && (coarse || (lastTap.id === el.dataset.id && now-lastTap.t < 420))) openPage(el.dataset.id);
@@ -1816,21 +1803,21 @@ Object.values(ICONS).forEach(el=>{
   });
 });
 function overTrash(ev, group){
-  if (group.includes(ICONS.trash)) return false;
+  if (!ICONS.trash || group.includes(ICONS.trash)) return false;
   const r = ICONS.trash.querySelector(".tile").getBoundingClientRect();
   return ev.clientX > r.left-10 && ev.clientX < r.right+10 && ev.clientY > r.top-10 && ev.clientY < r.bottom+10;
 }
 
 /* 자기소개 post-its on the desktop — filled from ME; the pair moves together by either bar */
 (function notes(){
-  document.getElementById("note1tx").innerHTML = `<h3>PROFILE</h3>
+  document.getElementById("note1tx").innerHTML = `<div class="nt-col"><h3>PROFILE</h3>
     <h2>${ME.nameKo}<span>${ME.nameEn}</span></h2>
     <p class="one">${ME.oneLine}</p>
-    <dl><dt>분야</dt><dd>${ME.role}</dd><dt>학교</dt><dd>${ME.school}</dd><dt>지역</dt><dd>${ME.city}</dd><dt>생년월일</dt><dd>${ME.birth}</dd><dt>상태</dt><dd>${ME.status}</dd></dl>`;
-  document.getElementById("note2tx").innerHTML = `<h3>KEYWORD</h3>
+    <dl><dt>분야</dt><dd>${ME.role}</dd><dt>학교</dt><dd>${ME.school}</dd><dt>지역</dt><dd>${ME.city}</dd><dt>생년월일</dt><dd>${ME.birth}</dd><dt>상태</dt><dd>${ME.status}</dd></dl></div>
+    <div class="nt-col"><h3>KEYWORD</h3>
     <ul>${ME.keywords.map(([k,l])=>`<li><b>#${k}</b><em>${l}</em></li>`).join("")}</ul>
     <h3>SKILL</h3>
-    <ul>${ME.skills.map(([,k,l])=>`<li><b>${k}</b><em>${l}</em></li>`).join("")}</ul>`;
+    <ul>${ME.skills.map(([,k,l])=>`<li><b>${k}</b><em>${l}</em></li>`).join("")}</ul></div>`;
   const m = document.getElementById("memo"), KEY = "jbos.notes.v2";
   const clamp = (x,y)=>[Math.max(0, Math.min(desk.clientWidth - 160, x)), Math.max(0, Math.min(desk.clientHeight - 60, y))];
   try { const p = JSON.parse(localStorage.getItem(KEY) || "null"); if (p && desk.clientWidth > 640){ const [x,y] = clamp(p.x,p.y); m.style.left = x+"px"; m.style.top = y+"px"; } } catch(e){}
@@ -2079,7 +2066,7 @@ document.querySelectorAll("[data-go]").forEach(b=> b.onclick = ()=> openPage(b.d
    ===================================================================== */
 const $ = id => document.getElementById(id);
 const miniIcon = id => ICO[id] || "";
-["p1","taste","music","mail"].forEach(id=>{
+["p1","music"].forEach(id=>{
   const it = ITEMS.find(x=>x.id===id);
   const b = document.createElement("button");
   b.className = "tb-btn tip"; b.dataset.id = id; b.dataset.tip = it.name;
