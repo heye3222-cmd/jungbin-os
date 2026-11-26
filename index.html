@@ -856,44 +856,52 @@ body.paging #desk{transform:none;opacity:.55}
   .tb-btn{width:42px}
   #wm{font-size:10.5px;right:14px;bottom:12px}
 }
-/* ---------- 자기소개 post-its: two flat sticky notes, straight and side by side ---------- */
-#memo{position:absolute;left:128px;top:24px;z-index:4;display:flex;gap:14px;align-items:stretch;animation:iconfade .5s ease both}
-.pit{position:relative;width:660px;display:flex;flex-direction:column;color:#111;font-family:var(--kr);
-  background:#F3F3F0;border-radius:8px;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 32px rgba(0,0,0,.4)}
-#memo.drag .pit{box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 20px 44px rgba(0,0,0,.5)}
-.note-bar{display:flex;align-items:center;height:30px;padding:0 4px;background:#E6E6E2;cursor:grab;user-select:none;touch-action:none;flex:none}
+/* ---------- 자기소개 post-it: same dark glass as the widgets, white ink, a touch of folder lime ---------- */
+#memo{position:absolute;left:128px;top:24px;z-index:4;display:flex;animation:iconfade .5s ease both}
+.pit{position:relative;width:640px;display:flex;flex-direction:column;color:#F2F2F2;font-family:var(--kr);
+  background:rgba(22,22,22,.58);border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;
+  backdrop-filter:blur(26px) saturate(1.3);-webkit-backdrop-filter:blur(26px) saturate(1.3);box-shadow:0 14px 40px rgba(0,0,0,.3)}
+.lite .pit{background:#161616}
+#memo.drag .pit{box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.note-bar{display:flex;align-items:center;height:36px;padding:0 6px 0 16px;cursor:grab;user-select:none;touch-action:none;flex:none;border-bottom:1px solid rgba(255,255,255,.07)}
+.note-bar::before{content:"MEMO";font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:8px}
+.note-bar::after{content:"";position:absolute;left:16px;top:15px;width:6px;height:6px;border-radius:50%;background:#D2F55B;box-shadow:0 0 8px rgba(210,245,91,.6)}
+.note-bar{position:relative}
+.note-bar::before{padding-left:14px}
 #memo.drag .note-bar{cursor:grabbing}
-.note-bar button{width:28px;height:24px;display:grid;place-items:center;color:rgba(17,17,17,.55);border-radius:4px}
-.note-bar button:hover{background:rgba(0,0,0,.07);color:#111}
+.note-bar button{width:28px;height:26px;display:grid;place-items:center;color:rgba(255,255,255,.5);border-radius:6px}
+.note-bar button:hover{background:rgba(255,255,255,.08);color:#fff}
+.note-bar button:first-child{display:none}
 .note-bar svg{width:11px;height:11px}
 .note-bar .sp{flex:1}
 #memo.min .note-tx{display:none}
 .note-tx{flex:1;display:grid;grid-template-columns:1fr 1fr;font-size:13px;line-height:1.65;user-select:text}
-.nt-col{padding:16px 22px 20px;min-width:0}
-.nt-col+.nt-col{border-left:1px solid rgba(17,17,17,.1)}
-.note-tx h3{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.14em;color:rgba(17,17,17,.45);margin:18px 0 8px}
+.nt-col{padding:18px 22px 20px;min-width:0}
+.nt-col+.nt-col{border-left:1px solid rgba(255,255,255,.07)}
+.note-tx h3{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.14em;color:rgba(255,255,255,.42);margin:18px 0 8px}
 .note-tx h3:first-child{margin-top:0}
-.note-tx h2{font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.2}
-.note-tx h2 span{font-family:var(--sans);font-weight:500;font-size:12.5px;letter-spacing:.01em;color:rgba(17,17,17,.5);margin-left:8px}
-.note-tx .one{margin-top:8px;font-weight:500;line-height:1.55;color:rgba(17,17,17,.85)}
-.note-tx dl{display:grid;grid-template-columns:58px 1fr;gap:3px 10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(17,17,17,.12)}
-.note-tx dt{color:rgba(17,17,17,.45)}
-.note-tx dd{font-weight:500}
-.note-tx ul{list-style:none;display:grid;gap:8px}
-.note-tx li b{display:block;font-weight:700}
-.note-tx li em{display:block;font-style:normal;font-size:12.5px;color:rgba(17,17,17,.62);line-height:1.5}
+.note-tx h2{font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.2;color:#fff}
+.note-tx h2 span{font-family:var(--sans);font-weight:500;font-size:12.5px;letter-spacing:.01em;color:rgba(255,255,255,.45);margin-left:8px}
+.note-tx .one{margin-top:8px;font-weight:500;line-height:1.55;color:rgba(255,255,255,.82)}
+.note-tx dl{display:grid;grid-template-columns:58px 1fr;gap:3px 10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+.note-tx dt{color:rgba(255,255,255,.42)}
+.note-tx dd{font-weight:500;color:#F2F2F2}
+.note-tx ul{list-style:none;display:grid;gap:9px}
+.note-tx li b{display:block;font-weight:700;color:#fff}
+.note-tx li b .hs{color:#D2F55B;margin-right:1px}
+.note-tx li em{display:block;font-style:normal;font-size:12.5px;color:rgba(255,255,255,.58);line-height:1.5}
 .lite #memo{animation:none}
 @media (max-width:640px){
-  #memo{left:0 !important;top:122px !important;right:0;bottom:8px;padding:4px 12px 14px;flex-direction:column;gap:10px;overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:stretch}
-  .pit{width:auto;flex:none}
+  #memo{left:0 !important;top:122px !important;right:0;bottom:8px;padding:4px 12px 14px;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .pit{width:auto;flex:none;border-radius:18px}
   .note-bar{cursor:default}
   .note-tx{grid-template-columns:1fr;font-size:12.5px;line-height:1.6}
-  .nt-col{padding:12px 16px 14px}
-  .nt-col+.nt-col{border-left:0;border-top:1px solid rgba(17,17,17,.1)}
-  .note-tx h2{font-size:19px}
+  .nt-col{padding:14px 16px 14px}
+  .nt-col+.nt-col{border-left:0;border-top:1px solid rgba(255,255,255,.07)}
+  .note-tx h2{font-size:20px}
   .note-tx h3{margin:12px 0 6px}
   .note-tx dl{margin-top:10px;padding-top:10px}
-  .note-tx ul{gap:5px}
+  .note-tx ul{gap:6px}
   #wm{display:none}
   #hero{display:none}
 }
@@ -923,7 +931,12 @@ body.paging #desk{transform:none;opacity:.55}
 .cs-meta dd{margin-top:8px;font-size:14.5px;line-height:1.55}
 .cs-sec{display:grid;grid-template-columns:200px minmax(0,1fr);column-gap:48px;row-gap:28px;padding-top:72px;margin-top:72px;border-top:1px solid rgba(255,255,255,.14)}
 .cs-h{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:rgba(255,255,255,.5);line-height:1.7}
-.cs-h b{display:block;font-family:var(--sans);font-size:30px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1.1;margin-top:6px}
+.cs-h i{display:block;margin-top:8px;font-style:normal;font-size:10.5px;letter-spacing:.14em;color:rgba(255,255,255,.4)}
+.cs-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.cs-nav button{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.16);font-size:13.5px;color:#F2F2F2;font-family:var(--kr)}
+.cs-nav button i{font-style:normal;font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.45)}
+.cs-nav button:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
+.cs-h b{display:block;font-family:var(--kr);font-size:30px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1.1;margin-top:6px}
 .cs-txt{font-size:16px;line-height:1.85;color:rgba(255,255,255,.86);max-width:700px}
 .cs-full{grid-column:1/-1;min-width:0}
 .cs-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
@@ -1366,9 +1379,10 @@ function caseP1(){
       <div class="w2"><dt>TEAM</dt><dd>고태우 · 이상훈 · 노구치미레이 · 황현지 · <b>박정빈</b></dd></div>
       <div class="w2"><dt>MY OUTPUT</dt><dd>판넬 2 (시안 ${PV.length}차례) · 도록 ${spreads.length}페이지 · 포스터 1 · 모션포스터 1</dd></div>
     </dl>
+    <nav class="cs-nav"><button data-jump="cs-poster"><i>01</i>포스터</button><button data-jump="cs-catalog"><i>02</i>도록</button><button data-jump="cs-panel"><i>03</i>판넬</button><button data-jump="cs-brand"><i>04</i>브랜드</button></nav>
 
-    <section class="cs-sec">
-      <div class="cs-h">01<b>Poster · Motion</b></div>
+    <section class="cs-sec" id="cs-poster">
+      <div class="cs-h">01<b>포스터</b><i>POSTER · MOTION POSTER</i></div>
       <p class="cs-txt rv">빛과 그림자로 읽히는 포스터를 만들고, 빛이 들어왔다 빠지며 그림자가 길어지는 8초 모션포스터로 움직였습니다. 모션포스터는 AR 전시에 사용했습니다.</p>
       <div class="cs-full cs-g2 cs-posters">
         ${csFig(posters.find(x=>x.n==="PFA_poster.jpg"))}
@@ -1376,8 +1390,8 @@ function caseP1(){
       </div>
     </section>
 
-    <section class="cs-sec">
-      <div class="cs-h">02<b>Catalog</b></div>
+    <section class="cs-sec" id="cs-catalog">
+      <div class="cs-h">02<b>도록</b><i>CATALOG</i></div>
       <p class="cs-txt rv">도록에서 제가 맡은 페이지들입니다. 브랜드가 사인과 인쇄물, 산업 현장 위에서 실제로 어떻게 보이는지를 펼쳤습니다.</p>
       <div class="cs-full">
         ${[["픽토그램과 안내체계","PICTOGRAM",pict,"로고의 막대 형태에서 출발한 픽토그램과, 그것이 현장 안내 사인으로 이어지는 체계"],
@@ -1390,8 +1404,8 @@ function caseP1(){
       </div>
     </section>
 
-    <section class="cs-sec">
-      <div class="cs-h">03<b>Panel</b></div>
+    <section class="cs-sec" id="cs-panel">
+      <div class="cs-h">03<b>판넬</b><i>EXHIBITION PANEL</i></div>
       <p class="cs-txt rv">졸업전시에 걸린 판넬 두 장. 11월 13일 1차부터 19일 최종까지, 레이아웃과 사진 비중, 정보 배치를 여섯 번 다시 잡았습니다.</p>
       <div class="cs-full">
         <div class="cs-grp"><h3 class="cs-sub">최종 판넬<span>FINAL · 11.19</span></h3>
@@ -1404,8 +1418,8 @@ function caseP1(){
       </div>
     </section>
 
-    <section class="cs-sec">
-      <div class="cs-h">04<b>Brand</b></div>
+    <section class="cs-sec" id="cs-brand">
+      <div class="cs-h">04<b>브랜드</b><i>BRAND SYSTEM · TEAM</i></div>
       <p class="cs-txt rv">제 작업의 바탕이 된, 팀이 함께 만든 브랜드 시스템입니다. PFA는 폭발 위험이 있는 산업 현장을 지키는 방폭 전문 기업으로, 눈에 띄지 않는 이 회사의 역할을 하나의 질서 있는 형태로 보여주는 것이 목표였습니다.</p>
       <div class="cs-full cs-three">
         <div class="cs-card rv"><span>CONCEPT</span><h4>UNDER CONTROL</h4><p>모든 것이 통제되고 있는 상태, 곧 PFA가 현장에 만들어내는 안전.</p></div>
@@ -1414,8 +1428,8 @@ function caseP1(){
       </div>
     </section>
 
-    <section class="cs-sec">
-      <div class="cs-h">05<b>Note</b></div>
+    <section class="cs-sec" id="cs-note">
+      <div class="cs-h">05<b>마무리</b><i>NOTE</i></div>
       <div class="cs-end rv">
         <p class="cs-txt">[이 작업이 나에 대해 말해주는 것 — 한두 문장]</p>
       </div>
@@ -1834,7 +1848,7 @@ function overTrash(ev, group){
     <p class="one">${ME.oneLine}</p>
     <dl><dt>분야</dt><dd>${ME.role}</dd><dt>학교</dt><dd>${ME.school}</dd><dt>지역</dt><dd>${ME.city}</dd><dt>생년월일</dt><dd>${ME.birth}</dd><dt>상태</dt><dd>${ME.status}</dd></dl></div>
     <div class="nt-col"><h3>KEYWORD</h3>
-    <ul>${ME.keywords.map(([k,l])=>`<li><b>#${k}</b><em>${l}</em></li>`).join("")}</ul>
+    <ul>${ME.keywords.map(([k,l])=>`<li><b><span class="hs">#</span>${k}</b><em>${l}</em></li>`).join("")}</ul>
     <h3>SKILL</h3>
     <ul>${ME.skills.map(([,k,l])=>`<li><b>${k}</b><em>${l}</em></li>`).join("")}</ul></div>`;
   const m = document.getElementById("memo"), KEY = "jbos.notes.v2";
@@ -1979,6 +1993,7 @@ function render(it){
     lb.onclick = ()=> lb.classList.remove("on");
     main.addEventListener("scroll", ()=> lb.classList.remove("on"), {passive:true});
     page.querySelector(".w-status span").textContent = `UNDER CONTROL · 작업 ${page.querySelectorAll(".cs-fig").length}개`;
+    page.querySelectorAll("[data-jump]").forEach(b=> b.onclick = ()=>{ const s = page.querySelector("#"+b.dataset.jump); if (s) main.scrollTo({top: s.offsetTop - 12, behavior:"smooth"}); });
   }
   // me.exe: thumbnails swap the big photo
   page.querySelectorAll("[data-pf]").forEach(b=> b.onclick = ()=>{
