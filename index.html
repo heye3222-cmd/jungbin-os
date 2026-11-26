@@ -1368,14 +1368,14 @@ function caseP1(){
   const pict = sp("pictogram"), office = sp("office"), ind = sp("industry");
   const byName = n => ALL.find(x=>x.n===n);
   const PV = [["panel_v1","판넬 1차","11.13"],["panel_v2","판넬 2차","11.16"],["panel_v2_update","2차 업데이트","11.17"],
-              ["panel_v3","최종시안 업데이트","11.18"],["panel_v3_2","최종시안 업데이트 2차","11.18"]]
+              ["panel_v3","최종시안 업데이트","11.18"]]
     .map(([k,ko,d])=>({ko, d, pages:[byName(k+"_01.jpg"), byName(k+"_02.jpg")].filter(Boolean)}));
   const panelFig = (x, label, cap) => csFig(Object.assign({}, x, {l:label, t:cap}));
   return `<article class="cs"><div class="cs-in">
     <div class="cs-eye"><b>JUNGBIN PARK</b><span>PROJECT 01</span><span>UNDER CONTROL</span><span>2026</span></div>
     <h1 class="cs-title cs-title-ko">멈춰 있는 브랜드에<br>움직임을 더하다</h1>
     <p class="cs-lead">PFA 리브랜딩 팀 프로젝트 ‘UNDER CONTROL’에서 저는 브랜드가 실제로 쓰이는 장면을 맡았습니다.
-      졸업전시 판넬을 여섯 번 고쳐 완성하고, 로고의 막대에서 픽토그램과 안내 사인을 만들고,
+      졸업전시 판넬을 다섯 번 고쳐 완성하고, 로고의 막대에서 픽토그램과 안내 사인을 만들고,
       업무 인쇄물과 산업현장 도록 페이지를 펼치고, 멈춰 있던 포스터를 8초짜리 모션으로 움직였습니다.</p>
     <dl class="cs-meta">
       <div class="w2"><dt>MY ROLE</dt><dd>졸업전시 판넬 · 포스터 · 모션포스터<br>도록 — 픽토그램·안내체계 / 업무 인쇄물 / 산업현장 적용</dd></div>
@@ -1411,7 +1411,7 @@ function caseP1(){
 
     <section class="cs-sec" id="cs-panel">
       <div class="cs-h">03<b>판넬</b><i>EXHIBITION PANEL</i></div>
-      <p class="cs-txt rv">졸업전시에 걸린 판넬 두 장. 11월 13일 1차부터 19일 최종까지, 레이아웃과 사진 비중, 정보 배치를 여섯 번 다시 잡았습니다.</p>
+      <p class="cs-txt rv">졸업전시에 걸린 판넬 두 장. 11월 13일 1차부터 19일 최종까지, 레이아웃과 사진 비중, 정보 배치를 다섯 번 다시 잡았습니다.</p>
       <div class="cs-full">
         <div class="cs-grp"><h3 class="cs-sub">최종 판넬<span>FINAL · 11.19</span></h3>
           <div class="cs-g2 cs-cat">${panels.map((x,i)=>panelFig(x, `FINAL · 0${i+1}`, i ? "판넬 2 — 배경 · 시스템 · 로고 콘셉트 · 슬로건" : "판넬 1 — UNDER CONTROL, 브랜드 소개와 현장 적용 이미지")).join("")}</div></div>
