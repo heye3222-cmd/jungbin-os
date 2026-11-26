@@ -682,7 +682,7 @@ body.paging #desk{transform:none;opacity:.55}
 /* ---------- me.exe: profile app, photo first ---------- */
 .pf{display:grid;grid-template-columns:minmax(300px,42%) minmax(0,1fr);min-height:100%}
 .pf-photo{position:sticky;top:0;align-self:start;padding:22px;display:flex;flex-direction:column;gap:12px;max-height:100%}
-.pf-main{width:100%;aspect-ratio:4/5;max-height:calc(100vh - 340px);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#1E2335,#131722);border:1px solid rgba(255,255,255,.09);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.pf-main{width:100%;aspect-ratio:4/5;max-height:calc(100vh - 370px);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#1E2335,#131722);border:1px solid rgba(255,255,255,.09);box-shadow:0 20px 50px rgba(0,0,0,.35)}
 .pf-main img{width:100%;height:100%;object-fit:cover;display:block}
 .pf-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(242,239,232,.3);text-align:center;padding:20px}
 .pf-ph svg{width:30%;max-width:120px}
@@ -693,7 +693,11 @@ body.paging #desk{transform:none;opacity:.55}
 .pf-thumbs button:hover{transform:translateY(-2px)}
 .pf-thumbs button.on{border:2px solid var(--acid)}
 .pf-thumbs img{width:100%;height:100%;object-fit:cover}
-.pf-cap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.pf-kw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pf-kw .kw{padding:12px 12px 13px;border-radius:11px;background:#171B27;border:1px solid rgba(255,255,255,.08);min-width:0}
+.pf-kw .kw span{font-family:var(--mono);font-size:10.5px;color:var(--acid)}
+.pf-kw .kw b{display:block;margin-top:6px;font-family:var(--kr);font-size:15px;font-weight:700;letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pf-kw .kw p{margin-top:4px;font-family:var(--kr);font-size:11.5px;line-height:1.5;color:var(--dim)}
 .pf-info{padding:30px 28px 40px 6px;min-width:0}
 .pf-eyebrow{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--acid)}
 .pf-eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acid);box-shadow:0 0 10px var(--acid)}
@@ -1386,8 +1390,7 @@ const ITEMS = [
     page:()=>`<div class="pf">
       <aside class="pf-photo">
         <div class="pf-main" data-pf-main>${photoBox(ME.photos[0], "PROFILE PHOTO", 0)}</div>
-        <div class="pf-thumbs">${ME.photos.map((src,i)=>`<button data-pf="${i}" class="${i ? "" : "on"}">${src ? `<img src="${src}" alt="" loading="lazy">` : `<span>${String(i+1).padStart(2,"0")}</span>`}</button>`).join("")}</div>
-        <div class="pf-cap"><span data-pf-name>${ME.names[0]}</span><span>4:5 권장 · 1600×2000</span></div>
+        <div class="pf-kw">${[1,2,3].map(i=>`<div class="kw"><span>#0${i}</span><b>[키워드 ${i}]</b><p>[이 키워드를 보여주는 한 줄]</p></div>`).join("")}</div>
       </aside>
       <section class="pf-info">
         <p class="pf-eyebrow"><i></i>작업 중 · PORTFOLIO 2026</p>
@@ -1397,9 +1400,6 @@ const ITEMS = [
 
         <div class="set-g"><h4>기본 정보</h4><div class="set-rows">
           ${setRow("user","이름","[이름 / NAME]")}${setRow("cal","태어난 해","[YYYY]")}${setRow("geo","지역","[지역], KR")}${setRow("cap","학교 · 전공","[학교 / 전공]")}${setRow("bolt","지금 상태","[지금 상태]")}
-        </div></div>
-        <div class="set-g"><h4>나를 이루는 키워드</h4><div class="set-rows">
-          ${[1,2,3].map(i=>setRow("star",`[키워드 ${i}]`,"","[이 키워드를 보여주는 한 줄]")).join("")}
         </div></div>
         <div class="set-g"><h4>스킬 & 툴</h4><div class="set-rows">
           ${[["[툴 1]",90],["[툴 2]",80],["[툴 3]",70],["[툴 4]",60],["[툴 5]",50]].map(([t,v])=>`<div class="set-row"><span class="ic">${GL.tool}</span><div class="lb">${t}</div><span class="bar"><i style="width:${v}%"></i></span><span class="vl" style="width:34px;text-align:right">${v}</span></div>`).join("")}
