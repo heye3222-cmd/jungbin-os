@@ -527,7 +527,7 @@ body::after{display:block;opacity:.03}
 #wm span{font-family:var(--kr);font-size:11px;color:rgba(210,245,91,.72)}
 .icon.sel{background:rgba(210,245,91,.13);border-color:rgba(210,245,91,.45)}
 [data-id="p1"] .tile::after{content:"NEW";position:absolute;right:-8px;top:0;font-family:var(--mono);font-size:8.5px;font-weight:500;letter-spacing:.04em;background:var(--acid);color:#000;padding:1px 4px;border-radius:3px;transform:rotate(9deg)}
-[data-id="trash"] .tile::after{content:"12";position:absolute;right:-4px;top:2px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#FF5A4E;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px rgba(10,14,30,.9)}
+[data-id="trash"] .tile::after{content:attr(data-n);position:absolute;right:-4px;top:2px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#FF5A4E;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px rgba(10,14,30,.9)}
 
 /* ---------- opened folder = a real OS window (explorer style) ---------- */
 #page{inset:10px 10px calc(var(--tb) + 10px) 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0F1119;overflow:hidden;flex-direction:column;
@@ -1051,7 +1051,7 @@ const appSvg = (g, inner) => `<svg viewBox="0 0 64 64"><rect x="6" y="6" width="
 const ICO = {
   me: appSvg("g-me", `<circle cx="32" cy="26" r="8" fill="#fff"/><path d="M17 47c2.5-7.5 8.5-11 15-11s12.5 3.5 15 11z" fill="#fff"/>`),
   about: `<svg viewBox="0 0 64 64"><path d="M15.5 4H39l14 14v40a2.5 2.5 0 0 1-2.5 2.5h-35A2.5 2.5 0 0 1 13 58V6.5A2.5 2.5 0 0 1 15.5 4z" fill="#F8F9FB"/><path d="M39 4v11.5a2.5 2.5 0 0 0 2.5 2.5H53z" fill="#D3D9E4"/><path d="M20 27h24M20 33h24M20 39h24M20 45h15" stroke="#A1AABA" stroke-width="2.2" stroke-linecap="round"/></svg>`,
-  p1: folderSvg("01"), p2: folderSvg("02"), p3: folderSvg("03"),
+  p1: folderSvg("01"), p2: folderSvg("02"), p3: folderSvg("03"), p4: folderSvg("04"),
   taste: folderSvg().replace("</svg>", `<path d="M30 22h4v33h-4z" fill="#4E6012" fill-opacity=".55"/><path d="M30 26h2M32 29h2M30 32h2M32 35h2M30 38h2" stroke="#F4FFC2" stroke-width="1.4"/><rect x="27.5" y="41" width="9" height="10" rx="1.6" fill="#ECEEF2" stroke="#4E6012" stroke-width="1.2"/><rect x="30.5" y="44" width="3" height="4" rx=".8" fill="#4E6012"/></svg>`),
   music: appSvg("g-music", `<rect x="19" y="30" width="5" height="15" rx="2.5" fill="#D2F55B"/><rect x="29.5" y="20" width="5" height="25" rx="2.5" fill="#D2F55B"/><rect x="40" y="26" width="5" height="19" rx="2.5" fill="#D2F55B"/>`),
   trash: `<svg viewBox="0 0 64 64"><path d="M21 15l4.5-7 6 4.5 5.5-6 5 8.5" fill="#F4F5F8" stroke="#C3CAD7"/><path d="M14 16h36l-3.2 40.5A3 3 0 0 1 43.8 59H20.2a3 3 0 0 1-3-2.5z" fill="url(#g-bin)" stroke="#DCEBFF" stroke-opacity=".7" stroke-width="1.2"/><path d="M12 14.5h40" stroke="#E6EEF8" stroke-width="3" stroke-linecap="round"/><path d="M25 24l1.2 28M32 24v28M39 24l-1.2 28" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/></svg>`,
@@ -1065,7 +1065,8 @@ const head = (n, title) => `<div class="sec-h rv"><b>${title}</b><span>${n}</spa
 const PROJECTS = {
   p1:{ no:"01", c:"#D2F55B" },
   p2:{ no:"02", c:"#D2F55B" },
-  p3:{ no:"03", c:"#D2F55B" }
+  p3:{ no:"03", c:"#D2F55B" },
+  p4:{ no:"04", c:"#D2F55B" }
 };
 
 /* ---------- building blocks for window contents (explorer / app views) ---------- */
@@ -1152,6 +1153,51 @@ const projectFS = no => [
   F("README.txt", "2KB", "2026-06-19 오후 3:10", "README",
     "[프로젝트 제목]\n\n역할: [역할]\n툴: [툴]\n기간: [기간]\n함께: [개인 / 팀]\n\nBRIEF\n[무엇을 해결하려 했나]\n\nIDEA\n[핵심 아이디어]\n\n이 작업이 나에 대해 말해주는 것\n[한두 문장]")
 ];
+/* Every other recovered work (generated from the original .pdf / .ai / .indd / .png / .mp4 files).
+   p = project (p1..p4, trash), f = folder, n = file, s = size, d = date, l = label, t = caption / why it was dropped */
+const ALL = [
+  {p:"p1", f:"03_포스터·모션", n:"banner.jpg", s:"120KB", d:"2026-11-20 오후 12:13", l:"BANNER", t:"PFA 현수막", src:"assets/p1/banner.jpg", th:"assets/p1/t_banner.jpg"},
+  {p:"p1", f:"03_포스터·모션", n:"poster_print.jpg", s:"125KB", d:"2026-11-20 오후 12:01", l:"POSTER · PRINT", t:"인쇄용 PFA 포스터 (549×777)", src:"assets/p1/poster_print.jpg", th:"assets/p1/t_poster_print.jpg"},
+  {p:"trash", f:"", n:"panel_v1_01.jpg", s:"139KB", d:"2026-11-13 오전 11:52", l:"PANEL v1 · 01", t:"판넬 1차 — 이후 레이아웃을 다시 짬 — 1쪽", src:"assets/trash/panel_v1_01.jpg", th:"assets/trash/t_panel_v1_01.jpg", orig:"~/졸작/판넬 1차.pdf"},
+  {p:"trash", f:"", n:"panel_v1_02.jpg", s:"208KB", d:"2026-11-13 오전 11:52", l:"PANEL v1 · 02", t:"판넬 1차 — 이후 레이아웃을 다시 짬 — 2쪽", src:"assets/trash/panel_v1_02.jpg", th:"assets/trash/t_panel_v1_02.jpg", orig:"~/졸작/판넬 1차.pdf"},
+  {p:"trash", f:"", n:"panel_v2_01.jpg", s:"222KB", d:"2026-11-16 오후 12:39", l:"PANEL v2 · 01", t:"판넬 2차 — 사진 비중을 더 키우기로 함 — 1쪽", src:"assets/trash/panel_v2_01.jpg", th:"assets/trash/t_panel_v2_01.jpg", orig:"~/졸작/판넬 2차.pdf"},
+  {p:"trash", f:"", n:"panel_v2_02.jpg", s:"195KB", d:"2026-11-16 오후 12:39", l:"PANEL v2 · 02", t:"판넬 2차 — 사진 비중을 더 키우기로 함 — 2쪽", src:"assets/trash/panel_v2_02.jpg", th:"assets/trash/t_panel_v2_02.jpg", orig:"~/졸작/판넬 2차.pdf"},
+  {p:"trash", f:"", n:"panel_v2_update_01.jpg", s:"201KB", d:"2026-11-17 오후 1:30", l:"PANEL v2.1 · 01", t:"판넬 2차 업데이트 — 정보 배치 다시 정리 — 1쪽", src:"assets/trash/panel_v2_update_01.jpg", th:"assets/trash/t_panel_v2_update_01.jpg", orig:"~/졸작/박정빈_판넬 2차 업데이트.pdf"},
+  {p:"trash", f:"", n:"panel_v2_update_02.jpg", s:"222KB", d:"2026-11-17 오후 1:30", l:"PANEL v2.1 · 02", t:"판넬 2차 업데이트 — 정보 배치 다시 정리 — 2쪽", src:"assets/trash/panel_v2_update_02.jpg", th:"assets/trash/t_panel_v2_update_02.jpg", orig:"~/졸작/박정빈_판넬 2차 업데이트.pdf"},
+  {p:"trash", f:"", n:"panel_v3_01.jpg", s:"226KB", d:"2026-11-18 오후 3:57", l:"PANEL v3 · 01", t:"최종시안 업데이트 — 헤드라인 추가 전 — 1쪽", src:"assets/trash/panel_v3_01.jpg", th:"assets/trash/t_panel_v3_01.jpg", orig:"~/졸작/판넬 최종시안 업데이트.pdf"},
+  {p:"trash", f:"", n:"panel_v3_02.jpg", s:"237KB", d:"2026-11-18 오후 3:57", l:"PANEL v3 · 02", t:"최종시안 업데이트 — 헤드라인 추가 전 — 2쪽", src:"assets/trash/panel_v3_02.jpg", th:"assets/trash/t_panel_v3_02.jpg", orig:"~/졸작/판넬 최종시안 업데이트.pdf"},
+  {p:"trash", f:"", n:"panel_v3_2_01.jpg", s:"223KB", d:"2026-11-18 오후 7:16", l:"PANEL v3.2 · 01", t:"최종시안 업데이트 2차 — 마지막 다듬기 전 — 1쪽", src:"assets/trash/panel_v3_2_01.jpg", th:"assets/trash/t_panel_v3_2_01.jpg", orig:"~/졸작/판넬 최종시안 업데이트 2차.pdf"},
+  {p:"trash", f:"", n:"panel_v3_2_02.jpg", s:"245KB", d:"2026-11-18 오후 7:16", l:"PANEL v3.2 · 02", t:"최종시안 업데이트 2차 — 마지막 다듬기 전 — 2쪽", src:"assets/trash/panel_v3_2_02.jpg", th:"assets/trash/t_panel_v3_2_02.jpg", orig:"~/졸작/판넬 최종시안 업데이트 2차.pdf"},
+  {p:"trash", f:"", n:"panel_almost_final.jpg", s:"311KB", d:"2026-11-19 오전 10:59", l:"PANEL v4", t:"찐 최종시안 — 헤드라인 넣기 직전 버전", src:"assets/trash/panel_almost_final.jpg", th:"assets/trash/t_panel_almost_final.jpg", orig:"~/졸작/판넬 찐 최종시안.jpg"},
+  {p:"trash", f:"", n:"catalog_v1_01.jpg", s:"154KB", d:"2026-11-03 오후 3:27", l:"CATALOG v1 · 01", t:"도록 첫 업데이트 — 구성 전면 수정 — 1쪽", src:"assets/trash/catalog_v1_01.jpg", th:"assets/trash/t_catalog_v1_01.jpg", orig:"~/졸작/도록/도록 업데이트(1).pdf"},
+  {p:"trash", f:"", n:"catalog_v1_02.jpg", s:"103KB", d:"2026-11-03 오후 3:27", l:"CATALOG v1 · 02", t:"도록 첫 업데이트 — 구성 전면 수정 — 2쪽", src:"assets/trash/catalog_v1_02.jpg", th:"assets/trash/t_catalog_v1_02.jpg", orig:"~/졸작/도록/도록 업데이트(1).pdf"},
+  {p:"trash", f:"", n:"catalog_v2_01.jpg", s:"158KB", d:"2026-11-04 오후 4:30", l:"CATALOG v2 · 01", t:"도록 333 — 페이지 흐름 다시 짬 — 1쪽", src:"assets/trash/catalog_v2_01.jpg", th:"assets/trash/t_catalog_v2_01.jpg", orig:"~/졸작/도록/도록 333.pdf"},
+  {p:"trash", f:"", n:"catalog_v2_02.jpg", s:"174KB", d:"2026-11-04 오후 4:30", l:"CATALOG v2 · 02", t:"도록 333 — 페이지 흐름 다시 짬 — 2쪽", src:"assets/trash/catalog_v2_02.jpg", th:"assets/trash/t_catalog_v2_02.jpg", orig:"~/졸작/도록/도록 333.pdf"},
+  {p:"trash", f:"", n:"catalog_v3_01.jpg", s:"158KB", d:"2026-11-04 오후 4:43", l:"CATALOG v3 · 01", t:"도록 업데이트 3 — 이미지 교체 전 — 1쪽", src:"assets/trash/catalog_v3_01.jpg", th:"assets/trash/t_catalog_v3_01.jpg", orig:"~/졸작/도록/도록 업데이트 3.pdf"},
+  {p:"trash", f:"", n:"catalog_v3_02.jpg", s:"174KB", d:"2026-11-04 오후 4:43", l:"CATALOG v3 · 02", t:"도록 업데이트 3 — 이미지 교체 전 — 2쪽", src:"assets/trash/catalog_v3_02.jpg", th:"assets/trash/t_catalog_v3_02.jpg", orig:"~/졸작/도록/도록 업데이트 3.pdf"},
+  {p:"trash", f:"", n:"catalog_v4_01.jpg", s:"155KB", d:"2026-11-05 오후 2:52", l:"CATALOG v4 · 01", t:"도록 4 — 최종 펼침면으로 대체됨 — 1쪽", src:"assets/trash/catalog_v4_01.jpg", th:"assets/trash/t_catalog_v4_01.jpg", orig:"~/졸작/도록 4.pdf"},
+  {p:"trash", f:"", n:"catalog_v4_02.jpg", s:"202KB", d:"2026-11-05 오후 2:52", l:"CATALOG v4 · 02", t:"도록 4 — 최종 펼침면으로 대체됨 — 2쪽", src:"assets/trash/catalog_v4_02.jpg", th:"assets/trash/t_catalog_v4_02.jpg", orig:"~/졸작/도록 4.pdf"},
+  {p:"trash", f:"", n:"poster_v1.jpg", s:"111KB", d:"2026-10-20 오전 10:41", l:"POSTER v1", t:"1차 포스터 'ㄹㅇ로 최종..2' — 결국 최종 아니었음", src:"assets/trash/poster_v1.jpg", th:"assets/trash/t_poster_v1.jpg", orig:"~/졸작/1차 포스터 ㄹㅇ로 최종..2.ai"},
+  {p:"trash", f:"", n:"poster_v1_alt.jpg", s:"175KB", d:"2026-10-22 오후 4:19", l:"POSTER v1+", t:"1차 포스터 시안 추가본", src:"assets/trash/poster_v1_alt.jpg", th:"assets/trash/t_poster_v1_alt.jpg", orig:"~/졸작/1차 포스터 ㄹㅇ로 최종..2_시안추가.ai"},
+  {p:"trash", f:"", n:"poster_v2.jpg", s:"137KB", d:"2026-10-26 오전 11:15", l:"POSTER v2", t:"포스터 수정2 — 그림자 방향을 다시 잡음", src:"assets/trash/poster_v2.jpg", th:"assets/trash/t_poster_v2.jpg", orig:"~/졸작/포스터디자인 수정2.png"},
+  {p:"trash", f:"", n:"poster_a3.jpg", s:"137KB", d:"2026-10-29 오후 3:25", l:"POSTER A3", t:"A3 축소판 테스트", src:"assets/trash/poster_a3.jpg", th:"assets/trash/t_poster_a3.jpg", orig:"~/졸작/포스터디자인 A3.ai"},
+  {p:"trash", f:"", n:"poster_a1_recovered.jpg", s:"153KB", d:"2026-11-03 오후 6:37", l:"POSTER A1", t:"A1 포스터 복구본 — 최종 전 버전", src:"assets/trash/poster_a1_recovered.jpg", th:"assets/trash/t_poster_a1_recovered.jpg", orig:"~/졸작/포스터디자인(A1) [복구됨].png"},
+  {p:"trash", f:"", n:"go_home.jpg", s:"200KB", d:"2026-11-03 오전 11:32", l:"집가고싶다", t:"'집가고싶다' — 작업하다 지쳐서 붙인 이름, 결국 탈락", src:"assets/trash/go_home.jpg", th:"assets/trash/t_go_home.jpg", orig:"~/졸작/집가고싶다 [복구됨].pdf"},
+  {p:"trash", f:"", n:"graphic_cand2.jpg", s:"244KB", d:"2026-11-18 오후 3:04", l:"GRAPHIC B", t:"그래픽 후보 2 — 왼쪽 앞 대각선", src:"assets/trash/graphic_cand2.jpg", th:"assets/trash/t_graphic_cand2.jpg", orig:"~/졸작/후보2 그래픽 반영.png"},
+  {p:"trash", f:"", n:"graphic_cand3.jpg", s:"270KB", d:"2026-11-18 오후 3:04", l:"GRAPHIC C", t:"그래픽 후보 3 — 오른쪽 앞 대각선", src:"assets/trash/graphic_cand3.jpg", th:"assets/trash/t_graphic_cand3.jpg", orig:"~/졸작/후보3 그래픽 반영.png"},
+  {p:"trash", f:"", n:"cloth_draft.jpg", s:"196KB", d:"2026-11-17 오전 10:37", l:"GOODS", t:"안경닦이 굿즈 시안 — 제작 안 함", src:"assets/trash/cloth_draft.jpg", th:"assets/trash/t_cloth_draft.jpg", orig:"~/모션포스터/05_판넬"},
+  {p:"trash", f:"", n:"panel_old_board1.jpg", s:"208KB", d:"2026-11-16 오전 11:21", l:"OLD BOARD", t:"판넬 초기 대지 1", src:"assets/trash/panel_old_board1.jpg", th:"assets/trash/t_panel_old_board1.jpg", orig:"~/모션포스터/05_판넬/미리보기"},
+  {p:"trash", f:"", n:"panel_old_board5.jpg", s:"255KB", d:"2026-11-16 오전 11:21", l:"OLD BOARD", t:"판넬 초기 대지 5", src:"assets/trash/panel_old_board5.jpg", th:"assets/trash/t_panel_old_board5.jpg", orig:"~/모션포스터/05_판넬/미리보기"},
+  {p:"trash", f:"", n:"motion_try_1.mp4", s:"1,458KB", d:"2026-10-28 오전 10:59", l:"MOTION A", t:"모션 시안 '한 장처럼' — 크리틱 후 탈락", src:"assets/trash/motion_try_1.mp4", th:"", video:true, orig:"~/모션포스터/04_AR제출"},
+  {p:"trash", f:"", n:"motion_try_2.mp4", s:"1,546KB", d:"2026-10-28 오전 10:59", l:"MOTION B", t:"모션 시안 '모두 동시에' — 탈락", src:"assets/trash/motion_try_2.mp4", th:"", video:true, orig:"~/모션포스터/04_AR제출"},
+  {p:"trash", f:"", n:"motion_try_3.mp4", s:"1,461KB", d:"2026-10-28 오후 5:00", l:"MOTION C", t:"모션 시안 '가운데 심볼' — 탈락", src:"assets/trash/motion_try_3.mp4", th:"", video:true, orig:"~/모션포스터/04_AR제출"},
+  {p:"trash", f:"", n:"motion_try_4.mp4", s:"1,526KB", d:"2026-10-28 오후 8:06", l:"MOTION D", t:"모션 시안 '심볼 블러로 등장' — 탈락", src:"assets/trash/motion_try_4.mp4", th:"", video:true, orig:"~/모션포스터/04_AR제출"}
+];
+const AF = x => F(x.n, x.s, x.d, x.l, x.t, Object.assign({src:x.src}, x.th ? {thumb:x.th} : {}, x.video ? {video:true} : {}, x.orig ? {orig:x.orig} : {}));
+const projFS = (p, readme) => {
+  const groups = [...new Set(ALL.filter(x=>x.p===p).map(x=>x.f))];
+  return groups.map(g=>{ const kids = ALL.filter(x=>x.p===p && x.f===g).map(AF); return D(g, kids, kids.map(k=>k.date).sort().pop()); }).concat(readme ? [readme] : []);
+};
 /* Project_01 — PFA rebranding "UNDER CONTROL" (real files in web/assets/p1).
    f = folder, n = file name, s = size, d = date, l = label, t = caption, src = image, th = thumbnail */
 const P1 = [
@@ -1211,8 +1257,8 @@ const P1 = [
     {f:"05_목업", n:"mockup_11.jpg", s:"333KB", d:"2026-11-10 오후 8:42", l:"MOCKUP 11", t:"PFA 현장 적용 목업", src:"assets/p1/mockup/mockup_11.jpg", th:"assets/p1/mockup/t_mockup_11.jpg"},
     {f:"05_목업", n:"mockup_12.jpg", s:"336KB", d:"2026-11-10 오후 8:42", l:"MOCKUP 12", t:"PFA 현장 적용 목업", src:"assets/p1/mockup/mockup_12.jpg", th:"assets/p1/mockup/t_mockup_12.jpg"},
     {f:"05_목업", n:"mockup_13.jpg", s:"74KB", d:"2026-11-11 오전 11:07", l:"MOCKUP 13", t:"PFA 현장 적용 목업", src:"assets/p1/mockup/mockup_13.jpg", th:"assets/p1/mockup/t_mockup_13.jpg"}
-];
-const P1F = x => F(x.n, x.s, x.d, x.l, x.t, {src:x.src, thumb:x.th});
+].concat(ALL.filter(x=>x.p==="p1"));
+const P1F = AF;
 const P1D = (folder, extra=[]) => { const kids = P1.filter(x=>x.f===folder).map(P1F).concat(extra); return D(folder, kids, kids.map(k=>k.date).sort().pop()); };
 const P1_FS = [
   P1D("01_판넬"),
@@ -1235,10 +1281,8 @@ const FS = {
     F("food.jpg", "745KB", "2026-06-09 오후 12:10", "FOOD", "[좋아하는 음식 — 왜 좋은지 한 줄]"),
     F("place.jpg", "861KB", "2026-06-09 오전 11:52", "PLACE", "[좋아하는 장소 — 왜 좋은지 한 줄]")
   ]},
-  trash: {title:"휴지통", trash:true, kids: [1,2,3,4,5,6,7,8,9,10,11,12].map(i=>{
-    const ext = i % 3 ? "ai" : "psd";
-    return F(`draft_${String(i).padStart(2,"0")}.${ext}`, `${((i*3917)%40000+1200).toLocaleString("en-US")}KB`, `2026-0${(i%6)+1}-1${i%9} 오후 ${(i%11)+1}:0${i%6}`, `DRAFT ${String(i).padStart(2,"0")}`, "[왜 버렸나]", {orig:`~/projects/0${(i%3)+1}`});
-  })}
+  /* 휴지통 = real earlier versions and dropped drafts */
+  trash: {title:"휴지통", trash:true, kids: ALL.filter(x=>x.p==="trash").map(AF)}
 };
 
 /* ---------- explorer (Windows-style folder window) ---------- */
@@ -1633,6 +1677,7 @@ ITEMS.forEach((it,i)=>{
   el.className="icon"; el.dataset.id=it.id; el.innerHTML = it.tile + `<span>${it.name}</span>`;
   desk.appendChild(el); ICONS[it.id] = el;
   el.querySelector(".tile").style.setProperty("--rot", [-4,3,-2,4,-3,2,-1,3,-4][i % 9] + "deg");
+  if (it.id === "trash") el.querySelector(".tile").dataset.n = FS.trash.kids.length;   // red badge = real number of dropped drafts
 });
 const selected = ()=> [...document.querySelectorAll(".icon.sel")];
 function select(els, add){
@@ -1778,7 +1823,7 @@ const clipFull = ()=> `inset(0px 0px 0px 0px round ${page.classList.contains("ma
 
 /* in-window back / forward history (like a file explorer) */
 let winHist = [], wi = -1;
-const KIND = {me:"응용 프로그램", about:"텍스트 문서", p1:"파일 폴더", p2:"파일 폴더", p3:"파일 폴더", taste:"압축 폴더", trash:"휴지통", mail:"응용 프로그램"};
+const KIND = {me:"응용 프로그램", about:"텍스트 문서", p1:"파일 폴더", p2:"파일 폴더", p3:"파일 폴더", p4:"파일 폴더", taste:"압축 폴더", trash:"휴지통", mail:"응용 프로그램"};
 const SVG_ARROW = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
 
 function render(it){
