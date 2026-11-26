@@ -1233,8 +1233,6 @@ const P1_FS = [
 ];
 const FS = {
   p1: {title:"Project_01", kids: P1_FS},
-  p2: {title:"Project_02", kids: projectFS("02")},
-  p3: {title:"Project_03", kids: projectFS("03")},
   taste: {title:"취향.zip", kids: [
     F("game.lnk", "2KB", "2026-05-14 오전 10:58", "GAME", "[좋아하는 게임 — 왜 좋은지 한 줄]"),
     F("playlist.mp3", "8,402KB", "2026-06-13 오후 8:07", "MUSIC", "[좋아하는 음악 — 왜 좋은지 한 줄]"),
@@ -1529,8 +1527,6 @@ const ITEMS = [
     }},
 
   { id:"p1", name:"Project_01", tile:tileOf("p1"), c:PROJECTS.p1.c, path:"~/projects/01", page:()=>xpShell("p1")},
-  { id:"p2", name:"Project_02", tile:tileOf("p2"), c:PROJECTS.p2.c, path:"~/projects/02", page:()=>xpShell("p2")},
-  { id:"p3", name:"Project_03", tile:tileOf("p3"), c:PROJECTS.p3.c, path:"~/projects/03", page:()=>xpShell("p3")},
 
   /* 취향.zip — extracted folder (real explorer list) */
   { id:"taste", name:"취향.zip", tile:tileOf("taste"), c:"#D2F55B", path:"~/취향.zip", page:()=>xpShell("taste")},
@@ -1926,7 +1922,7 @@ document.querySelectorAll("[data-go]").forEach(b=> b.onclick = ()=> openPage(b.d
    ===================================================================== */
 const $ = id => document.getElementById(id);
 const miniIcon = id => ICO[id] || "";
-["me","p1","p2","p3","taste","music","mail"].forEach(id=>{
+["me","p1","taste","music","mail"].forEach(id=>{
   const it = ITEMS.find(x=>x.id===id);
   const b = document.createElement("button");
   b.className = "tb-btn tip"; b.dataset.id = id; b.dataset.tip = it.name;
