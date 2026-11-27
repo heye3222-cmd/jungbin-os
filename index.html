@@ -941,14 +941,14 @@ body.paging #desk{transform:none;opacity:.55}
 .cs-meta .w2{grid-column:span 2}
 .cs-meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:rgba(255,255,255,.45)}
 .cs-meta dd{margin-top:8px;font-size:14.5px;line-height:1.55}
-.cs-sec{display:grid;grid-template-columns:200px minmax(0,1fr);column-gap:48px;row-gap:28px;padding-top:72px;margin-top:72px;border-top:1px solid rgba(255,255,255,.14)}
-.cs-h{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:rgba(255,255,255,.5);line-height:1.7}
-.cs-h i{display:block;margin-top:8px;font-style:normal;font-size:10.5px;letter-spacing:.14em;color:rgba(255,255,255,.4)}
+.cs-sec{display:grid;grid-template-columns:minmax(0,1fr);row-gap:22px;padding-top:64px;margin-top:64px;border-top:1px solid rgba(255,255,255,.14)}
+.cs-h{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:rgba(255,255,255,.5);line-height:1.2}
+.cs-h i{display:block;margin:0;font-style:normal;font-size:10.5px;letter-spacing:.14em;color:rgba(255,255,255,.4)}
 .cs-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
 .cs-nav button{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.16);font-size:13.5px;color:#F2F2F2;font-family:var(--kr)}
 .cs-nav button i{font-style:normal;font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.45)}
 .cs-nav button:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
-.cs-h b{display:block;font-family:var(--kr);font-size:30px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1.1;margin-top:6px}
+.cs-h b{display:block;font-family:var(--kr);font-size:30px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1.1;margin:0}
 .cs-txt{font-size:16px;line-height:1.85;color:rgba(255,255,255,.86);max-width:700px}
 .cs-full{grid-column:1/-1;min-width:0}
 .cs-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
@@ -1123,7 +1123,7 @@ body{touch-action:manipulation}
     <div class="pins" id="pins"></div>
     <h5>추천 <span>recommended</span></h5>
     <div class="recs">
-      <button class="rec" data-go="p1"><i>01</i><div><b>포트폴리오</b><span>박정빈 · 2026</span></div></button>
+      <button class="rec" data-go="p1"><i>01</i><div><b>Portfolio</b><span>박정빈 · 2026</span></div></button>
       <button class="rec" data-go="music"><i>fm</i><div><b>JB.fm</b><span>음악 듣기</span></div></button>
     </div>
   </div>
@@ -1380,8 +1380,8 @@ function caseP1(){
   const panelFig = (x, label, cap) => csFig(Object.assign({}, x, {l:label, t:cap}));
   return `<article class="cs"><div class="cs-in">
     <div class="cs-eye"><b>JUNGBIN PARK</b><span>VISUAL DESIGN</span><span>2026</span></div>
-    <h1 class="cs-title cs-title-ko">포트폴리오</h1>
-    <p class="cs-lead">시각디자인 박정빈의 포트폴리오입니다.<br>${ME.oneLine}.</p>
+    <h1 class="cs-title">PORTFOLIO</h1>
+    <p class="cs-lead">시각디자인 박정빈의 포트폴리오입니다.</p>
 
     <section class="cs-sec" id="cs-poster">
       <div class="cs-h">01<b>포스터</b><i>POSTER · MOTION POSTER</i></div>
@@ -1661,7 +1661,7 @@ const ME = {
   school: "경남정보대학교 · AI시각디자인학과",
   birth: "2006. 11. 21",
   status: "졸업 예정",
-  oneLine: "멈춰 있는 그래픽에 움직임과 공간을 더하는 시각디자이너",
+  oneLine: "",
   keywords: [
     ["Until It's Right", "맞다고 느낄 때까지 수십 번이라도 다시 만들어요"],
     ["Graphics in Motion", "포스터를 모션과 AR로 움직이고 반응하게 만들어요"],
@@ -1682,7 +1682,7 @@ const setRow = (ic, label, val, sub="") =>
   `<div class="set-row"><span class="ic">${GL[ic]}</span><div class="lb">${label}${sub ? `<small>${sub}</small>` : ""}</div><span class="vl">${val}</span></div>`;
 
 const ITEMS = [
-  { id:"p1", name:"포트폴리오", tile:tileOf("p1"), c:PROJECTS.p1.c, path:"~/portfolio", cs:true, page:()=>caseP1()},
+  { id:"p1", name:"Portfolio", tile:tileOf("p1"), c:PROJECTS.p1.c, path:"~/portfolio", cs:true, page:()=>caseP1()},
 
   { id:"music", name:"JB.fm", app:true, c:"#D6FF3D",
     tile:tileOf("music") }
@@ -1841,7 +1841,7 @@ function overTrash(ev, group){
 (function notes(){
   document.getElementById("note1tx").innerHTML = `<div class="nt-col"><h3>PROFILE</h3>
     <h2>${ME.nameKo}<span>${ME.nameEn}</span></h2>
-    <p class="one">${ME.oneLine}</p>
+    ${ME.oneLine ? `<p class="one">${ME.oneLine}</p>` : ""}
     <dl><dt>분야</dt><dd>${ME.role}</dd><dt>학교</dt><dd>${ME.school}</dd><dt>지역</dt><dd>${ME.city}</dd><dt>생년월일</dt><dd>${ME.birth}</dd><dt>상태</dt><dd>${ME.status}</dd></dl></div>
     <div class="nt-col"><h3>KEYWORD</h3>
     <ul>${ME.keywords.map(([k,l])=>`<li><b><span class="hs">#</span>${k}</b><em>${l}</em></li>`).join("")}</ul>
@@ -1988,7 +1988,7 @@ function render(it){
     page.querySelectorAll("[data-zoom]").forEach(im=> im.onclick = ()=>{ lb.querySelector("img").src = im.dataset.zoom; lb.style.top = main.scrollTop+"px"; lb.style.height = main.clientHeight+"px"; lb.classList.add("on"); });
     lb.onclick = ()=> lb.classList.remove("on");
     main.addEventListener("scroll", ()=> lb.classList.remove("on"), {passive:true});
-    page.querySelector(".w-status span").textContent = `포트폴리오 · 작업 ${page.querySelectorAll(".cs-fig").length}개`;
+    page.querySelector(".w-status span").textContent = `Portfolio · 작업 ${page.querySelectorAll(".cs-fig").length}개`;
     page.querySelectorAll("[data-jump]").forEach(b=> b.onclick = ()=>{ const s = page.querySelector("#"+b.dataset.jump); if (s) main.scrollTo({top: s.offsetTop - 12, behavior:"smooth"}); });
   }
   // me.exe: thumbnails swap the big photo
