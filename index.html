@@ -44,18 +44,19 @@
   if (lite) document.documentElement.className += " lite";
 })();
 </script>
-<link rel="preload" href="assets/fonts/KOTRA_GOTHIC.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@font-face{font-family:"KOTRA Gothic";src:url("assets/fonts/KOTRA_GOTHIC.ttf") format("truetype");font-weight:400;font-display:swap}
 :root{
   --bg:#121114; --fg:#F2EFE8; --dim:rgba(242,239,232,.55); --faint:rgba(242,239,232,.1);
   --acid:#F2F2F2; --blue:#E8E8E8;
   /* hip palette — soft pastels so it stays easy on the eyes */
   --pink:#FF92C8; --lilac:#B9A7FF; --orange:#FFA266; --sky:#8AD6FF; --lemon:#F7E27C; --cream:#F2EFE8; --ink:#141317;
-  --display:"KOTRA Gothic","Malgun Gothic",sans-serif; --krd:"KOTRA Gothic","Malgun Gothic",sans-serif;
+  --display:"IBM Plex Sans KR","Malgun Gothic",sans-serif; --krd:"IBM Plex Sans KR","Malgun Gothic",sans-serif;
   --hard:3px 3px 0 #000; --glass:rgba(24,24,27,.62); --glass2:rgba(255,255,255,.06);
   --line:1px solid rgba(255,255,255,.1); --r:18px;
-  --sans:"KOTRA Gothic","Malgun Gothic",sans-serif; --mono:"KOTRA Gothic","Malgun Gothic",sans-serif; --kr:"KOTRA Gothic","Malgun Gothic",sans-serif;
+  --sans:"IBM Plex Sans KR","Malgun Gothic",sans-serif; --mono:"IBM Plex Sans KR","Malgun Gothic",sans-serif; --kr:"IBM Plex Sans KR","Malgun Gothic",sans-serif;
   --spring:cubic-bezier(.34,1.56,.64,1); --ease:cubic-bezier(.7,0,.2,1);
   --tb:calc(52px + env(safe-area-inset-bottom, 0px));
 }
@@ -818,8 +819,7 @@ body.paging #desk{transform:none;opacity:.55}
 #mono{display:none}
 /* name sits low on the wallpaper, plain white */
 #hero{position:absolute;left:clamp(20px,2.4vw,40px);bottom:clamp(18px,3vh,36px);text-align:left;pointer-events:none;user-select:none}
-/* KOTRA Gothic has one weight: a ring of tight white shadows thickens it evenly into a bold */
-.hero-word{font-weight:700;font-size:clamp(96px,15vw,280px);line-height:.86;letter-spacing:-.01em;color:#FFFFFF;text-shadow:0.0220em 0.0000em 0 #FFFFFF,0.0203em 0.0084em 0 #FFFFFF,0.0156em 0.0156em 0 #FFFFFF,0.0084em 0.0203em 0 #FFFFFF,0.0000em 0.0220em 0 #FFFFFF,-0.0084em 0.0203em 0 #FFFFFF,-0.0156em 0.0156em 0 #FFFFFF,-0.0203em 0.0084em 0 #FFFFFF,-0.0220em 0.0000em 0 #FFFFFF,-0.0203em -0.0084em 0 #FFFFFF,-0.0156em -0.0156em 0 #FFFFFF,-0.0084em -0.0203em 0 #FFFFFF,-0.0000em -0.0220em 0 #FFFFFF,0.0084em -0.0203em 0 #FFFFFF,0.0156em -0.0156em 0 #FFFFFF,0.0203em -0.0084em 0 #FFFFFF,0.0102em 0.0042em 0 #FFFFFF,0.0042em 0.0102em 0 #FFFFFF,-0.0042em 0.0102em 0 #FFFFFF,-0.0102em 0.0042em 0 #FFFFFF,-0.0102em -0.0042em 0 #FFFFFF,-0.0042em -0.0102em 0 #FFFFFF,0.0042em -0.0102em 0 #FFFFFF,0.0102em -0.0042em 0 #FFFFFF,0 10px 30px rgba(0,0,0,.35);margin-left:-.02em}
+.hero-word{font-weight:700;font-size:clamp(96px,15vw,280px);line-height:.86;letter-spacing:-.01em;color:#FFFFFF;text-shadow:0 10px 30px rgba(0,0,0,.35);margin-left:-.02em}
 .hero-sub{margin-top:16px;padding-left:.15em;font-size:17px;color:rgba(255,255,255,.7)}
 .hero-sub b{color:#FFFFFF;font-weight:500}
 /* widgets (right column) */
@@ -996,9 +996,6 @@ body.paging #desk{transform:none;opacity:.55}
   .cs-h b{font-size:24px}
   .cs-txt{font-size:15px}
 }
-/* ---------- bold for the single-weight KOTRA Gothic: a tight ring of same-colour shadows ---------- */
-:root{--fb-l:0.0200em 0.0000em 0,0.0185em 0.0077em 0,0.0141em 0.0141em 0,0.0077em 0.0185em 0,0.0000em 0.0200em 0,-0.0077em 0.0185em 0,-0.0141em 0.0141em 0,-0.0185em 0.0077em 0,-0.0200em 0.0000em 0,-0.0185em -0.0077em 0,-0.0141em -0.0141em 0,-0.0077em -0.0185em 0,-0.0000em -0.0200em 0,0.0077em -0.0185em 0,0.0141em -0.0141em 0,0.0185em -0.0077em 0,0.0092em 0.0038em 0,0.0039em 0.0092em 0,-0.0038em 0.0092em 0,-0.0092em 0.0039em 0,-0.0092em -0.0038em 0,-0.0039em -0.0092em 0,0.0038em -0.0092em 0,0.0092em -0.0039em 0;--fb-s:0.0140em 0.0000em 0,0.0121em 0.0070em 0,0.0070em 0.0121em 0,0.0000em 0.0140em 0,-0.0070em 0.0121em 0,-0.0121em 0.0070em 0,-0.0140em 0.0000em 0,-0.0121em -0.0070em 0,-0.0070em -0.0121em 0,-0.0000em -0.0140em 0,0.0070em -0.0121em 0,0.0121em -0.0070em 0}
-.cs-title,.cs-pname,.cs-quote{text-shadow:var(--fb-l)}
 .cs-h b{font-weight:700}
 .cs-title{letter-spacing:-.015em}
 .cs-pname{letter-spacing:0}
@@ -1186,7 +1183,7 @@ const G = {
   mail:`<svg viewBox="0 0 24 24" ${S}><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>`
 };
 /* desktop icons — real file / folder / app shapes (gradients live in #icon-defs) */
-const folderSvg = (label="") => `<svg viewBox="0 0 64 64"><path d="M5 15.5A3.5 3.5 0 0 1 8.5 12H24l5 5h26.5A3.5 3.5 0 0 1 59 20.5V27H5z" fill="#2F6BD0"/><rect x="9" y="17" width="46" height="16" rx="1.5" fill="#FDFDFB"/><rect x="12" y="20" width="40" height="13" rx="1" fill="#E9ECF2"/><path d="M3 25.5A3.5 3.5 0 0 1 6.5 22h51a3.5 3.5 0 0 1 3.5 3.5v26a3.5 3.5 0 0 1-3.5 3.5h-51A3.5 3.5 0 0 1 3 51.5z" fill="url(#g-fold)"/><path d="M4 25h56" stroke="#B9DAFF" stroke-opacity=".8"/>${label ? `<text x="55" y="50.5" text-anchor="end" font-family="KOTRA Gothic,Arial,sans-serif" font-size="11" font-weight="700" fill="#0F3D7A" fill-opacity=".75">${label}</text>` : ""}</svg>`;
+const folderSvg = (label="") => `<svg viewBox="0 0 64 64"><path d="M5 15.5A3.5 3.5 0 0 1 8.5 12H24l5 5h26.5A3.5 3.5 0 0 1 59 20.5V27H5z" fill="#2F6BD0"/><rect x="9" y="17" width="46" height="16" rx="1.5" fill="#FDFDFB"/><rect x="12" y="20" width="40" height="13" rx="1" fill="#E9ECF2"/><path d="M3 25.5A3.5 3.5 0 0 1 6.5 22h51a3.5 3.5 0 0 1 3.5 3.5v26a3.5 3.5 0 0 1-3.5 3.5h-51A3.5 3.5 0 0 1 3 51.5z" fill="url(#g-fold)"/><path d="M4 25h56" stroke="#B9DAFF" stroke-opacity=".8"/>${label ? `<text x="55" y="50.5" text-anchor="end" font-family="IBM Plex Sans KR,Arial,sans-serif" font-size="11" font-weight="700" fill="#0F3D7A" fill-opacity=".75">${label}</text>` : ""}</svg>`;
 const appSvg = (g, inner) => `<svg viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" fill="url(#${g})"/><rect x="6.5" y="6.5" width="51" height="51" fill="none" stroke="#fff" stroke-opacity=".2"/>${inner}</svg>`;
 const ICO = {
   me: appSvg("g-me", `<circle cx="32" cy="26" r="8" fill="#fff"/><path d="M17 47c2.5-7.5 8.5-11 15-11s12.5 3.5 15 11z" fill="#fff"/>`),
@@ -1217,8 +1214,8 @@ const GL = {
   font:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 19l6-14h2l6 14M8 14h8"/></svg>`,
   dot:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="9" r="4"/><circle cx="16" cy="9" r="4"/><circle cx="12" cy="15" r="4"/></svg>`,
   pin:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>`,
-  ai:`<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#33260F"/><text x="12" y="16" text-anchor="middle" font-family="KOTRA Gothic,Arial" font-weight="700" font-size="9" fill="#FF9A00">Ai</text></svg>`,
-  psd:`<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#0B2135"/><text x="12" y="16" text-anchor="middle" font-family="KOTRA Gothic,Arial" font-weight="700" font-size="9" fill="#31A8FF">Ps</text></svg>`,
+  ai:`<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#33260F"/><text x="12" y="16" text-anchor="middle" font-family="IBM Plex Sans KR,Arial" font-weight="700" font-size="9" fill="#FF9A00">Ai</text></svg>`,
+  psd:`<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#0B2135"/><text x="12" y="16" text-anchor="middle" font-family="IBM Plex Sans KR,Arial" font-weight="700" font-size="9" fill="#31A8FF">Ps</text></svg>`,
   user:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>`,
   cal:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>`,
   geo:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>`,
