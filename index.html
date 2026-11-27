@@ -846,6 +846,16 @@ body.paging #desk{transform:none;opacity:.55}
 .wdg-np div{min-width:0;flex:1}
 .wdg-np span{display:block;font-family:var(--mono);font-size:10.5px;color:var(--acid)}
 .wdg-np b{display:block;font-size:17px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* current song under "Playlist": long titles glide sideways and back, like a music app */
+#wnp .mq{display:block;overflow:hidden;font-family:var(--kr);white-space:nowrap;margin-top:3px;font-size:13px;color:rgba(255,255,255,.62);
+  -webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+#wnp .mq:not(.long){-webkit-mask-image:none;mask-image:none}
+#wnp .mq-in:empty{display:none}
+#wnp .mq-in{display:inline-block;font-size:13px;color:rgba(255,255,255,.62);white-space:nowrap;width:max-content;will-change:transform}
+#wnp .mq-a{display:inline;font-size:inherit;color:rgba(255,255,255,.4)}
+#wnp .mq.long .mq-in{animation:mqmove var(--mqt,10s) linear infinite}
+@keyframes mqmove{0%,14%{transform:translateX(0)}50%,64%{transform:translateX(var(--mqx,0px))}100%{transform:translateX(0)}}
+.lite #wnp .mq.long .mq-in{animation-duration:calc(var(--mqt,10s) * 1.4)}
 .wdg-np em{display:block;font-style:normal;font-size:11.5px;color:var(--dim)}
 .wdg-np button{width:38px;height:38px;border-radius:50%;background:var(--fg);color:#000;display:grid;place-items:center;flex:none}
 .wdg-np button:hover{background:var(--acid)}
@@ -1120,7 +1130,7 @@ body{touch-action:manipulation}
   </section>
   <div id="wdgs">
     <section class="wdg"><div class="wc-t" id="wct"><span id="wch">--</span><span class="wc-c" id="wcc">:</span><span id="wcm">--</span><small id="wcs">--</small></div><div class="wc-d" id="wcd"></div><div class="wc-f"><span>JUNGBIN OS</span><span>박정빈</span></div></section>
-    <section class="wdg wdg-np" id="wnp"><img id="wnpimg" alt="" style="display:none"><div><b id="wnpt">Playlist</b></div>
+    <section class="wdg wdg-np" id="wnp"><img id="wnpimg" alt="" style="display:none"><div><b id="wnpt">Playlist</b><span class="mq" id="wnpmq"><span class="mq-in" id="wnps"></span></span></div>
       <button id="wnpbtn" aria-label="재생"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></section>
   </div>
   <div id="wm"><b>JUNGBIN OS</b></div>
@@ -2242,6 +2252,19 @@ $("power").querySelector("button").onclick = e=>{ e.stopPropagation(); $("power"
 $("p-lock").onclick = ()=>{ closeStart(); if (current) history.back(); setTimeout(showLock, current ? 600 : 0); };
 $("p-restart").onclick = ()=>{ closeStart(); closeMusic(); location.href = location.pathname; };
 
+/* sideways scroll for the song name when it doesn't fit */
+function fitMarquee(){
+  const box = $("wnpmq"), inner = $("wnps"); if (!box || !inner) return;
+  box.classList.remove("long"); inner.style.removeProperty("--mqx");
+  const over = inner.scrollWidth - box.clientWidth;
+  if (over > 4){
+    box.style.setProperty("--mqx", `-${over + 16}px`);
+    box.style.setProperty("--mqt", `${Math.max(7, (over + 16) / 22 + 5).toFixed(1)}s`);   // longer title = slower, readable pace
+    void inner.offsetWidth; box.classList.add("long");
+  }
+}
+addEventListener("resize", ()=> setTimeout(fitMarquee, 60));
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(()=> setTimeout(fitMarquee, 60));
 /* clock / date */
 const DAYS = ["일","월","화","수","목","금","토"];
 function tick(){
@@ -2296,6 +2319,12 @@ function renderTracks(){
     if (musicOpen) $("wnpimg").src = t.thumb;
     $("wnpimg").style.display = musicOpen ? "" : "none";
     $("wnpbtn").innerHTML = playing ? SVG_PAUSE : SVG_PLAY;
+    const songKey = musicOpen ? ti : -1;
+    if ($("wnps").dataset.k !== String(songKey)){        // only rebuild when the song changes, so the scroll doesn't restart every tick
+      $("wnps").dataset.k = String(songKey);
+      $("wnps").innerHTML = musicOpen ? `${t.title} <span class="mq-a">— ${t.artist}</span>` : "";
+      setTimeout(fitMarquee, 60); setTimeout(fitMarquee, 600);   // second pass after the font/thumbnail settle
+    }
   }
   $("mplay").setAttribute("aria-label", playing ? "일시정지" : "재생");
   $("mshuf").classList.toggle("on", shuffle);
