@@ -522,7 +522,7 @@ body::after{display:block;opacity:.03}
 #mono{position:absolute;right:-3vw;bottom:-9vw;font-weight:900;font-size:38vw;line-height:.8;letter-spacing:-.08em;color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.07);pointer-events:none;user-select:none}
 #wm span{font-family:var(--kr);font-size:11px;color:rgba(255,255,255,.72)}
 .icon.sel{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.45)}
-[data-id="p1"] .tile::after{content:"NEW";position:absolute;right:-8px;top:0;font-family:var(--mono);font-size:8.5px;font-weight:500;letter-spacing:.04em;background:#D2F55B;color:#000;padding:1px 4px;border-radius:3px;transform:rotate(9deg)}
+[data-id="p1"] .tile::after{content:"NEW";position:absolute;right:-8px;top:0;font-family:var(--mono);font-size:8.5px;font-weight:500;letter-spacing:.04em;background:#F2F2F2;color:#000;padding:1px 4px;border-radius:3px;transform:rotate(9deg)}
 [data-id="trash"] .tile::after{content:attr(data-n);position:absolute;right:-4px;top:2px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#F2F2F2;color:#000;font-size:10px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px rgba(10,10,10,.9)}
 
 /* ---------- opened folder = a real OS window (explorer style) ---------- */
@@ -841,7 +841,7 @@ body.paging #desk{transform:none;opacity:.55}
 .wdg-np img{width:52px;height:52px;border-radius:10px;object-fit:cover;background:linear-gradient(135deg,#30323D,#15161C);flex:none}
 .wdg-np div{min-width:0;flex:1}
 .wdg-np span{display:block;font-family:var(--mono);font-size:10.5px;color:var(--acid)}
-.wdg-np b{display:block;font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.wdg-np b{display:block;font-size:17px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .wdg-np em{display:block;font-style:normal;font-size:11.5px;color:var(--dim)}
 .wdg-np button{width:38px;height:38px;border-radius:50%;background:var(--fg);color:#000;display:grid;place-items:center;flex:none}
 .wdg-np button:hover{background:var(--acid)}
@@ -1031,10 +1031,10 @@ body{touch-action:manipulation}
 <body>
 <!-- shared gradients for the desktop icons -->
 <svg id="icon-defs" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-  <linearGradient id="g-fold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6F98F"/><stop offset="1" stop-color="#B7D33F"/></linearGradient>
+  <linearGradient id="g-fold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FB1FF"/><stop offset="1" stop-color="#3B82F6"/></linearGradient>
   <linearGradient id="g-bin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8E8E8" stop-opacity=".85"/><stop offset="1" stop-color="#9A9A9A" stop-opacity=".55"/></linearGradient>
   <linearGradient id="g-me" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A3A3A"/><stop offset="1" stop-color="#1A1A1A"/></linearGradient>
-  <linearGradient id="g-music" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#30323D"/><stop offset="1" stop-color="#15161C"/></linearGradient>
+  <linearGradient id="g-music" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B9DFF"/><stop offset="1" stop-color="#2563EB"/></linearGradient>
   <linearGradient id="g-mail" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E2E2E"/><stop offset="1" stop-color="#121212"/></linearGradient>
 </defs></svg>
 <div id="glow"></div>
@@ -1079,7 +1079,7 @@ body{touch-action:manipulation}
   </section>
   <div id="wdgs">
     <section class="wdg"><div class="wc-t" id="wct">--:--</div><div class="wc-d" id="wcd"></div><div class="wc-f"><span>JUNGBIN OS</span><span>박정빈</span></div></section>
-    <section class="wdg wdg-np" id="wnp"><img id="wnpimg" alt=""><div><span>JB.fm</span><b id="wnpt">눌러서 음악 틀기</b><em id="wnpa">5곡 · 풀버전</em></div>
+    <section class="wdg wdg-np" id="wnp"><img id="wnpimg" alt="" style="display:none"><div><b id="wnpt">Playlist</b></div>
       <button id="wnpbtn" aria-label="재생"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></section>
   </div>
   <div id="wm"><b>JUNGBIN OS · Portfolio Edition</b>Build 2026.11<br><span>정품 인증 대기 중 — 졸업하면 자동 인증됩니다</span></div>
@@ -1170,13 +1170,13 @@ const G = {
   mail:`<svg viewBox="0 0 24 24" ${S}><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>`
 };
 /* desktop icons — real file / folder / app shapes (gradients live in #icon-defs) */
-const folderSvg = (label="") => `<svg viewBox="0 0 64 64"><path d="M5 15.5A3.5 3.5 0 0 1 8.5 12H24l5 5h26.5A3.5 3.5 0 0 1 59 20.5V27H5z" fill="#86A12C"/><rect x="9" y="17" width="46" height="16" rx="1.5" fill="#FDFDFB"/><rect x="12" y="20" width="40" height="13" rx="1" fill="#E9ECF2"/><path d="M3 25.5A3.5 3.5 0 0 1 6.5 22h51a3.5 3.5 0 0 1 3.5 3.5v26a3.5 3.5 0 0 1-3.5 3.5h-51A3.5 3.5 0 0 1 3 51.5z" fill="url(#g-fold)"/><path d="M4 25h56" stroke="#F4FFC2" stroke-opacity=".8"/>${label ? `<text x="55" y="50.5" text-anchor="end" font-family="KOTRA Gothic,Arial,sans-serif" font-size="11" font-weight="700" fill="#4E6012" fill-opacity=".75">${label}</text>` : ""}</svg>`;
+const folderSvg = (label="") => `<svg viewBox="0 0 64 64"><path d="M5 15.5A3.5 3.5 0 0 1 8.5 12H24l5 5h26.5A3.5 3.5 0 0 1 59 20.5V27H5z" fill="#2F6BD0"/><rect x="9" y="17" width="46" height="16" rx="1.5" fill="#FDFDFB"/><rect x="12" y="20" width="40" height="13" rx="1" fill="#E9ECF2"/><path d="M3 25.5A3.5 3.5 0 0 1 6.5 22h51a3.5 3.5 0 0 1 3.5 3.5v26a3.5 3.5 0 0 1-3.5 3.5h-51A3.5 3.5 0 0 1 3 51.5z" fill="url(#g-fold)"/><path d="M4 25h56" stroke="#B9DAFF" stroke-opacity=".8"/>${label ? `<text x="55" y="50.5" text-anchor="end" font-family="KOTRA Gothic,Arial,sans-serif" font-size="11" font-weight="700" fill="#0F3D7A" fill-opacity=".75">${label}</text>` : ""}</svg>`;
 const appSvg = (g, inner) => `<svg viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="14" fill="url(#${g})"/><rect x="6.5" y="6.5" width="51" height="51" rx="13.5" fill="none" stroke="#fff" stroke-opacity=".2"/>${inner}</svg>`;
 const ICO = {
   me: appSvg("g-me", `<circle cx="32" cy="26" r="8" fill="#fff"/><path d="M17 47c2.5-7.5 8.5-11 15-11s12.5 3.5 15 11z" fill="#fff"/>`),
   about: `<svg viewBox="0 0 64 64"><path d="M15.5 4H39l14 14v40a2.5 2.5 0 0 1-2.5 2.5h-35A2.5 2.5 0 0 1 13 58V6.5A2.5 2.5 0 0 1 15.5 4z" fill="#F8F9FB"/><path d="M39 4v11.5a2.5 2.5 0 0 0 2.5 2.5H53z" fill="#D3D9E4"/><path d="M20 27h24M20 33h24M20 39h24M20 45h15" stroke="#A1AABA" stroke-width="2.2" stroke-linecap="round"/></svg>`,
   p1: folderSvg("01"), p2: folderSvg("02"), p3: folderSvg("03"), p4: folderSvg("04"),
-  taste: folderSvg().replace("</svg>", `<path d="M30 22h4v33h-4z" fill="#4E6012" fill-opacity=".55"/><path d="M30 26h2M32 29h2M30 32h2M32 35h2M30 38h2" stroke="#F4FFC2" stroke-width="1.4"/><rect x="27.5" y="41" width="9" height="10" rx="1.6" fill="#ECEEF2" stroke="#4E6012" stroke-width="1.2"/><rect x="30.5" y="44" width="3" height="4" rx=".8" fill="#4E6012"/></svg>`),
+  taste: folderSvg().replace("</svg>", `<path d="M30 22h4v33h-4z" fill="#0F3D7A" fill-opacity=".55"/><path d="M30 26h2M32 29h2M30 32h2M32 35h2M30 38h2" stroke="#B9DAFF" stroke-width="1.4"/><rect x="27.5" y="41" width="9" height="10" rx="1.6" fill="#ECEEF2" stroke="#0F3D7A" stroke-width="1.2"/><rect x="30.5" y="44" width="3" height="4" rx=".8" fill="#0F3D7A"/></svg>`),
   music: appSvg("g-music", `<rect x="19" y="30" width="5" height="15" rx="2.5" fill="#F2F2F2"/><rect x="29.5" y="20" width="5" height="25" rx="2.5" fill="#F2F2F2"/><rect x="40" y="26" width="5" height="19" rx="2.5" fill="#F2F2F2"/>`),
   trash: `<svg viewBox="0 0 64 64"><path d="M21 15l4.5-7 6 4.5 5.5-6 5 8.5" fill="#F4F5F8" stroke="#C3CAD7"/><path d="M14 16h36l-3.2 40.5A3 3 0 0 1 43.8 59H20.2a3 3 0 0 1-3-2.5z" fill="url(#g-bin)" stroke="#DCEBFF" stroke-opacity=".7" stroke-width="1.2"/><path d="M12 14.5h40" stroke="#E6EEF8" stroke-width="3" stroke-linecap="round"/><path d="M25 24l1.2 28M32 24v28M39 24l-1.2 28" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/></svg>`,
   mail: appSvg("g-mail", `<rect x="16" y="21" width="32" height="23" rx="3.5" fill="#fff"/><path d="M17.5 23.5L32 34l14.5-10.5" fill="none" stroke="#111111" stroke-width="2.4" stroke-linejoin="round"/>`)
@@ -2177,10 +2177,8 @@ function renderTracks(){
   $("mplay").innerHTML = playing ? SVG_PAUSE : SVG_PLAY;
   // desktop "now playing" widget
   if ($("wnp")){
-    $("wnpt").textContent = musicOpen ? t.title : "눌러서 음악 틀기";
-    $("wnpa").textContent = musicOpen ? t.artist : `${TRACKS.length}곡 · 풀버전`;
     if (musicOpen) $("wnpimg").src = t.thumb;
-    $("wnpimg").style.visibility = musicOpen ? "visible" : "hidden";
+    $("wnpimg").style.display = musicOpen ? "" : "none";
     $("wnpbtn").innerHTML = playing ? SVG_PAUSE : SVG_PLAY;
   }
   $("mplay").setAttribute("aria-label", playing ? "일시정지" : "재생");
