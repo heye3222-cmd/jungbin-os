@@ -857,7 +857,7 @@ body.paging #desk{transform:none;opacity:.55}
 }
 /* ---------- 자기소개 post-it: square dark note, plain type ---------- */
 #memo{position:absolute;left:128px;top:24px;z-index:4;display:flex;animation:iconfade .5s ease both}
-.pit{position:relative;width:640px;display:flex;flex-direction:column;color:#F2F2F2;font-family:var(--kr);
+.pit{position:relative;width:760px;display:flex;flex-direction:column;color:#F2F2F2;font-family:var(--kr);
   background:rgba(22,22,22,.72);border:1px solid rgba(255,255,255,.12);border-radius:0;overflow:hidden;
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .lite .pit{background:#161616}
@@ -871,6 +871,9 @@ body.paging #desk{transform:none;opacity:.55}
 .note-bar .sp{flex:1}
 #memo.min .note-tx{display:none}
 .note-tx{flex:1;display:grid;grid-template-columns:1fr 1fr;font-size:14px;line-height:1.7;user-select:text}
+.note-tx:has(.nt-ph){grid-template-columns:140px 1fr 1fr}
+.nt-ph{padding:18px 0 18px 20px}
+.nt-ph img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border:1px solid rgba(255,255,255,.14);background:#222}
 .nt-col{padding:18px 22px 22px;min-width:0}
 .nt-col+.nt-col{border-left:1px solid rgba(255,255,255,.1)}
 .note-tx h3{font-size:12.5px;font-weight:400;color:rgba(255,255,255,.5);margin:20px 0 8px}
@@ -891,9 +894,12 @@ body.paging #desk{transform:none;opacity:.55}
   #memo{left:0 !important;top:122px !important;right:0;bottom:8px;padding:4px 12px 14px;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
   .pit{width:auto;flex:none}
   .note-bar{cursor:default}
-  .note-tx{grid-template-columns:1fr;font-size:13.5px;line-height:1.6}
+  .note-tx,.note-tx:has(.nt-ph){grid-template-columns:96px 1fr;font-size:13.5px;line-height:1.6}
+  .note-tx .nt-col:last-child{grid-column:1/-1}
+  .nt-ph{padding:14px 0 0 16px}
   .nt-col{padding:14px 16px}
   .nt-col+.nt-col{border-left:0;border-top:1px solid rgba(255,255,255,.1)}
+  .note-tx:not(:has(.nt-ph)){grid-template-columns:1fr}
   .note-tx h2{font-size:22px}
   .note-tx h3{margin:14px 0 6px}
   .note-tx dl{margin-top:10px;padding-top:10px}
@@ -1644,7 +1650,7 @@ function mountExplorer(root, it){
    (upload the image next to index.html). empty "" = placeholder box
    ===================================================================== */
 const ME = {
-  photos: ["", "", "", ""],
+  photos: ["assets/me/profile.jpg", "", "", ""],
   names:  ["profile_01.jpg", "profile_02.jpg", "profile_03.jpg", "profile_04.jpg"],
   /* profile info */
   nameKo: "박정빈", nameEn: "Jungbin Park",
@@ -1831,7 +1837,7 @@ function overTrash(ev, group){
 
 /* 자기소개 post-its on the desktop — filled from ME; the pair moves together by either bar */
 (function notes(){
-  document.getElementById("note1tx").innerHTML = `<div class="nt-col"><h3>프로필</h3>
+  document.getElementById("note1tx").innerHTML = `${ME.photos[0] ? `<div class="nt-ph"><img src="${ME.photos[0]}" alt="${ME.nameKo} 사진"></div>` : ""}<div class="nt-col"><h3>프로필</h3>
     <h2>${ME.nameKo}<span>${ME.nameEn}</span></h2>
     ${ME.oneLine ? `<p class="one">${ME.oneLine}</p>` : ""}
     <dl><dt>분야</dt><dd>${ME.role}</dd><dt>학교</dt><dd>${ME.school}</dd><dt>지역</dt><dd>${ME.city}</dd><dt>생년월일</dt><dd>${ME.birth}</dd><dt>상태</dt><dd>${ME.status}</dd></dl></div>
