@@ -847,7 +847,7 @@ body.paging #desk{transform:none;opacity:.55}
 .wdg-np button{width:38px;height:38px;border-radius:50%;background:var(--fg);color:#000;display:grid;place-items:center;flex:none}
 .wdg-np button:hover{background:var(--acid)}
 .wdg-np button svg{width:16px;height:16px}
-@media (max-width:1260px){ #wdgs{display:none} }
+@media (max-width:1330px){ #wdgs{display:none} }
 @media (max-width:640px){
   #hero{bottom:96px} .hero-sub{letter-spacing:.25em;font-size:10px}
   /* phone taskbar: start + a few apps only (folders are already on the home screen) */
@@ -858,7 +858,7 @@ body.paging #desk{transform:none;opacity:.55}
 }
 /* ---------- 자기소개 post-it: square dark note, plain type ---------- */
 #memo{position:absolute;left:128px;top:24px;z-index:4;display:flex;animation:iconfade .5s ease both}
-.pit{position:relative;width:800px;display:flex;flex-direction:column;color:#F2F2F2;font-family:var(--kr);
+.pit{position:relative;width:870px;display:flex;flex-direction:column;color:#F2F2F2;font-family:var(--kr);
   background:rgba(22,22,22,.72);border:1px solid rgba(255,255,255,.12);border-radius:0;overflow:hidden;
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .lite .pit{background:#161616}
@@ -872,10 +872,10 @@ body.paging #desk{transform:none;opacity:.55}
 .note-bar .sp{flex:1}
 #memo.min .note-tx{display:none}
 .note-tx{flex:1;display:grid;grid-template-columns:1fr 1fr;font-size:14px;line-height:1.7;user-select:text}
-.note-tx:has(.nt-ph){grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+.note-tx:has(.nt-ph){grid-template-columns:minmax(0,1.75fr) minmax(0,1fr)}
 /* photo + profile text share one block: photo top = "프로필" top, photo bottom = last info row */
 .nt-me{display:flex;gap:20px;align-items:stretch;align-self:start}
-.nt-ph{flex:none;width:150px}
+.nt-ph{flex:none;width:186px}
 .nt-ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;border:1px solid rgba(255,255,255,.14);background:#222}
 .nt-pt{flex:1;min-width:0}
 .nt-col{padding:18px 22px 22px;min-width:0}
@@ -885,7 +885,7 @@ body.paging #desk{transform:none;opacity:.55}
 .note-tx h2{font-size:26px;font-weight:400;line-height:1.2;color:#fff}
 .note-tx h2 span{font-size:14px;font-weight:400;color:rgba(255,255,255,.5);margin-left:8px}
 .note-tx .one{margin-top:8px;color:rgba(255,255,255,.82)}
-.note-tx dl{display:grid;grid-template-columns:64px 1fr;gap:2px 10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}
+.note-tx dl{display:grid;grid-template-columns:74px 1fr;gap:2px 10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}
 .note-tx dt{color:rgba(255,255,255,.5)}
 .note-tx dd{color:#F2F2F2}
 .note-tx ul{list-style:none;display:grid;gap:10px}
@@ -970,6 +970,11 @@ body.paging #desk{transform:none;opacity:.55}
 .cs-grp-d{margin:-6px 0 18px;font-size:13.5px;color:rgba(255,255,255,.6)}
 .cs-cat{align-items:start}
 .cs-quote{font-family:var(--kr);font-size:clamp(24px,3.2vw,40px);font-weight:700;line-height:1.4;letter-spacing:-.03em;color:#fff}
+.cs-sec .cs-end{flex-direction:column;align-items:flex-start;gap:0}
+.cs-contact{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin-top:28px;font-size:16px}
+.cs-contact dt{color:rgba(255,255,255,.5)}
+.cs-contact a,.nt-a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3)}
+.cs-contact a:hover,.nt-a:hover{border-color:#fff}
 .cs-ver+.cs-ver{margin-top:30px}
 .cs-ver-h{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;font-size:14px}
 .cs-ver-h b{font-family:var(--mono);font-size:11px;font-weight:500;color:rgba(255,255,255,.45)}
@@ -1438,6 +1443,7 @@ function caseP1(){
       <div class="cs-h">04<b>마무리</b><i>NOTE</i></div>
       <div class="cs-end rv">
         <p class="cs-quote">끝까지 한다면 뭐든 불가능하겠나,<br>계속 시도하라.</p>
+        <dl class="cs-contact"><dt>연락</dt><dd><a href="tel:${ME.phone.replace(/-/g,"")}">${ME.phone}</a></dd><dt>인스타그램</dt><dd><a href="https://www.instagram.com/${ME.insta.toLowerCase()}/" target="_blank" rel="noopener">@${ME.insta}</a></dd></dl>
       </div>
     </section>
   </div><div class="cs-lb" aria-hidden="true"><img alt=""></div></article>`;
@@ -1673,6 +1679,8 @@ const ME = {
   school: "경남정보대학교 AI시각디자인학과",
   birth: "2006. 11. 21",
   status: "졸업 예정",
+  phone: "010-4512-8577",
+  insta: "Ju_ngbin06",
   oneLine: "",
   keywords: [
     ["Until It's Right", "맞다고 느낄 때까지 수십 번이라도 다시 만들어요"],
@@ -1854,7 +1862,7 @@ function overTrash(ev, group){
   document.getElementById("note1tx").innerHTML = `<div class="nt-col nt-me">${ME.photos[0] ? `<div class="nt-ph"><img src="${ME.photos[0]}" alt="${ME.nameKo} 사진"></div>` : ""}<div class="nt-pt"><h3>프로필</h3>
     <h2>${ME.nameKo}<span>${ME.nameEn}</span></h2>
     ${ME.oneLine ? `<p class="one">${ME.oneLine}</p>` : ""}
-    <dl><dt>분야</dt><dd>${ME.role}</dd><dt>학교</dt><dd>${ME.school}</dd><dt>지역</dt><dd>${ME.city}</dd><dt>생년월일</dt><dd>${ME.birth}</dd><dt>상태</dt><dd>${ME.status}</dd></dl></div></div>
+    <dl><dt>분야</dt><dd>${ME.role}</dd><dt>학교</dt><dd>${ME.school}</dd><dt>지역</dt><dd>${ME.city}</dd><dt>생년월일</dt><dd>${ME.birth}</dd><dt>상태</dt><dd>${ME.status}</dd><dt>연락</dt><dd><a class="nt-a" href="tel:${ME.phone.replace(/-/g,"")}">${ME.phone}</a></dd><dt>인스타그램</dt><dd><a class="nt-a" href="https://www.instagram.com/${ME.insta.toLowerCase()}/" target="_blank" rel="noopener">@${ME.insta}</a></dd></dl></div></div>
     <div class="nt-col"><h3>키워드</h3>
     <ul>${ME.keywords.map(([k,l])=>`<li><b>${k}</b><em>${l}</em></li>`).join("")}</ul>
     <h3>스킬</h3>
