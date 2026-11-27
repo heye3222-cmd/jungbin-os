@@ -2053,12 +2053,38 @@ function render(it){
       // warm up the neighbours so the arrows feel instant
       [idx-1, idx+1].forEach(k=>{ if (list[k]) { const pre = new Image(); pre.src = list[k].dataset.zoom; } });
     };
-    vw._go = d => { const n = idx + d; if (n < 0 || n >= list.length) return; idx = n; show(); };
-    vw._close = ()=>{ vw.classList.remove("on"); main.style.overflow = ""; };
+    let vwBusy = false;
+    // clip-path that shrinks the viewer down onto a thumbnail on the page underneath
+    const clipTo = im => { const r = im.getBoundingClientRect(), v = vw.getBoundingClientRect();
+      return `inset(${Math.max(0, r.top-v.top)}px ${Math.max(0, v.right-r.right)}px ${Math.max(0, v.bottom-r.bottom)}px ${Math.max(0, r.left-v.left)}px)`; };
+    vw._go = d => { const n = idx + d; if (n < 0 || n >= list.length || vwBusy) return; idx = n; show();
+      // the next picture slides in from the side you are heading to
+      anim(vw.querySelector(".vw-stage img"), [{opacity:0, transform:`translateX(${d*48}px)`}, {opacity:1, transform:"none"}], {duration:340, easing:"cubic-bezier(.2,.8,.2,1)"});
+      anim(vw.querySelector(".vw-info"), [{opacity:0}, {opacity:1}], {duration:260, easing:"ease-out"}); };
+    vw._close = ()=>{
+      if (!vw.classList.contains("on") || vwBusy) return;
+      vwBusy = true;
+      const done = ()=>{ vw.classList.remove("on"); vw.getAnimations().forEach(a=>a.cancel()); vw.style.clipPath = ""; main.style.overflow = ""; vwBusy = false; };
+      // shrink back into the thumbnail of the page you were looking at (it may be a different one than you opened)
+      const th = list[idx], mr = main.getBoundingClientRect(), tr = th.getBoundingClientRect();
+      const thTop = tr.top - mr.top + main.scrollTop;
+      if (thTop < lockTop || thTop + tr.height > lockTop + main.clientHeight){   // thumbnail is off-screen: bring it into view behind the viewer
+        lockTop = Math.max(0, Math.min(main.scrollHeight - main.clientHeight, thTop - (main.clientHeight - tr.height) / 2));
+        main.scrollTop = lockTop; fit();
+      }
+      anim(vw, [{clipPath: "inset(0px 0px 0px 0px)"}, {clipPath: clipTo(list[idx])}], {duration:460, easing:"cubic-bezier(.7,0,.2,1)", fill:"forwards"}, done);
+    };
     page.querySelectorAll(".cs-sec").forEach(sec=>{
       const part = (sec.querySelector(".cs-h b") || {}).textContent || "";
       const imgs = [...sec.querySelectorAll("img[data-zoom]")];
-      imgs.forEach((im, i)=> im.onclick = ()=>{ list = imgs; idx = i; lockTop = main.scrollTop; vw.querySelector(".vw-part").textContent = part; fit(); main.style.overflow = "hidden"; vw.classList.add("on"); show(); });
+      imgs.forEach((im, i)=> im.onclick = ()=>{
+        if (vwBusy) return;
+        vw.getAnimations().forEach(a=>a.cancel());   // drop any leftover close animation
+        list = imgs; idx = i; lockTop = main.scrollTop; vw.querySelector(".vw-part").textContent = part; fit(); main.style.overflow = "hidden"; vw.classList.add("on"); show();
+        vwBusy = true;
+        anim(vw, [{clipPath: clipTo(im)}, {clipPath: "inset(0px 0px 0px 0px)"}], {duration:560, easing:"cubic-bezier(.7,0,.2,1)"}, ()=>{ vwBusy = false; vw.style.clipPath = ""; });
+        anim(vw.querySelector(".vw-info"), [{opacity:0, transform:"translateY(14px)"}, {opacity:1, transform:"none"}], {duration:380, delay:260, easing:"cubic-bezier(.2,.8,.2,1)", fill:"backwards"});
+      });
     });
     vw.querySelectorAll("[data-vw]").forEach(b=> b.onclick = ()=> vw._go(+b.dataset.vw));
     vw.querySelector("[data-vw-close]").onclick = vw._close;
