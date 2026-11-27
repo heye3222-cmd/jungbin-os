@@ -1018,6 +1018,15 @@ body.paging #desk{transform:none;opacity:.55}
 .vw-info dl{display:grid;grid-template-columns:64px 1fr;gap:6px 14px;font-size:15px;line-height:1.65}
 .vw-info dt{color:rgba(255,255,255,.5)}
 .vw-info dd{color:rgba(255,255,255,.88)}
+.vw-info{max-height:46%;overflow-y:auto}
+.vw-refs{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08)}
+.vw-refs[hidden]{display:none}
+.vw-refs h4{font-size:13px;font-weight:500;color:rgba(255,255,255,.5);margin-bottom:8px}
+.vw-refs h4 span{margin-left:8px;color:rgba(255,255,255,.35)}
+.vw-rl{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.vw-rl a{flex:none;display:block;height:84px;border:1px solid rgba(255,255,255,.14);background:#000}
+.vw-rl a:hover{border-color:var(--acid)}
+.vw-rl img{display:block;height:100%;width:auto}
 @media (max-width:760px){
   .vw-top{padding:0 12px;gap:10px}
   .vw-stage{grid-template-columns:40px minmax(0,1fr) 40px;gap:6px;padding:12px 8px}
@@ -1423,10 +1432,100 @@ const FS = {
 /* ---------- Project_01 case study: everything in one scroll ---------- */
 /* NOTES — 각 이미지의 콘셉트/설명을 직접 적는 곳. 파일 이름을 키로 쓰면 아래 기본 문구 대신 이게 보여요.
    예: "spread_01_pictogram.jpg": {concept:"…", desc:"…"} */
-const NOTES = {};
+const NOTES = {
+ "spread_01_pictogram.jpg": {
+  "concept": "로고의 막대를 그대로 쪼개 만든 픽토그램",
+  "desc": "PFA 로고를 이루는 막대의 비율과 끝 처리를 그대로 가져와 사람, 장애인, 계단, 엘리베이터, 주차 등 현장에 필요한 픽토그램 12종을 만들었습니다. 오른쪽에는 이 픽토그램이 실제 벽면 사인과 돌출 사인에 들어간 모습을 함께 놓아, 기호가 공간에서 어떻게 읽히는지 보여줍니다."
+ },
+ "spread_02_pictogram.jpg": {
+  "concept": "픽토그램 하나가 안내 사인이 되기까지",
+  "desc": "단독 픽토그램이 화살표와 이어져 실제 사인 형태로 넓어지는 과정을 단계별로 보여줍니다. 같은 기호가 크기와 조합만 바뀌어 층 안내, 방향 안내, 주차 안내로 쓰이도록 규칙을 정리했습니다."
+ },
+ "spread_03_pictogram.jpg": {
+  "concept": "배경이 바뀌어도 기호가 먼저 보이는 컬러 시스템",
+  "desc": "주황 바탕에 흰 기호, 흰 바탕에 주황 기호 두 가지 조합으로 픽토그램 세트를 정리하고 어두운 실내 벽면과 엘리베이터 홀에 적용했습니다. 색은 예쁘게가 아니라 대비를 기준으로 나눴습니다."
+ },
+ "spread_04_office.jpg": {
+  "concept": "어느 인쇄물을 집어도 같은 회사로 보이게",
+  "desc": "명함, 레터헤드, 봉투, 파일 폴더처럼 회사에서 매일 쓰는 인쇄물을 한 세트로 묶었습니다. 회색 종이 위에 주황 띠와 로고 막대만 반복해서, 종류가 달라도 한 브랜드로 읽히도록 했습니다."
+ },
+ "spread_05_office.jpg": {
+  "concept": "두께가 있는 책에서도 보이는 브랜드",
+  "desc": "회사 소개서 표지와 봉투를 세워 찍은 목업과 사용 예시를 함께 정리했습니다. 표지에는 로고 막대를 크게 키워 넣어, 책꽂이에 꽂힌 옆모습에서도 PFA가 바로 보이게 했습니다."
+ },
+ "spread_06_office.jpg": {
+  "concept": "사무 공간 안에서 쓰이는 장면",
+  "desc": "회의실 화면에 띄운 프레젠테이션과 노트, 필기구 같은 작은 사무용품을 한 페이지에 모아, 브랜드가 실제 업무 흐름 안에서 쓰이는 장면을 보여줍니다."
+ },
+ "spread_07_office.jpg": {
+  "concept": "작은 사물에서도 유지되는 디테일",
+  "desc": "명함과 봉투의 세부, 도면 위에서 쓰이는 펜을 가까이 담았습니다. 크기가 작아져도 주황 포인트와 막대 패턴이 흐트러지지 않는지 확인하는 페이지입니다."
+ },
+ "spread_08_industry.jpg": {
+  "concept": "물건이 움직이는 곳에서 보이는 브랜드",
+  "desc": "트레일러와 포장 박스에 막대 패턴과 로고를 입혀, 물건이 실제로 오가는 물류 현장에서 브랜드가 어떻게 보이는지 보여줍니다."
+ },
+ "spread_09_industry.jpg": {
+  "concept": "멀리서도 읽히는 가림막",
+  "desc": "공사 현장 가림막에 큰 글자와 주황 면을 써서 멀리 떨어진 곳에서도 PFA가 읽히도록 했습니다. 하늘과 대비되는 색을 그대로 활용했습니다."
+ },
+ "spread_10_industry.jpg": {
+  "concept": "건물 밖에서 안까지 이어지는 첫인상",
+  "desc": "공장 입구의 콘크리트 사인과 박스 포장에 같은 막대 그래픽을 적용해, 들어서는 순간부터 안에서 받는 물건까지 하나의 브랜드로 이어지게 했습니다."
+ },
+ "spread_11_industry.jpg": {
+  "concept": "산업현장 적용 정리",
+  "desc": "비계에 거는 메쉬 가림막과 함께 박스, 트레일러, 사인 적용을 네 컷으로 모아 산업현장 파트를 마무리했습니다."
+ },
+ "panel_01.jpg": {
+  "concept": "보이지 않는 통제가 일상 전체에 깔려 있다",
+  "desc": "졸업전시에 실제로 걸린 첫 번째 판넬입니다. 위쪽 주황 띠에 UNDER CONTROL과 브랜드 소개를 넣고, 아래에는 사무실과 물류 현장이 한 장면으로 이어지는 이미지를 크게 깔았습니다. 레퍼런스처럼 큰 타이포와 사진 한 장으로 먼저 분위기를 잡고, 정보는 띠 안에 모았습니다."
+ },
+ "panel_02.jpg": {
+  "concept": "같은 장면 위에 브랜드를 설명하다",
+  "desc": "두 번째 판넬은 같은 장면을 바탕으로 배경, 시스템, 로고 콘셉트, 슬로건을 정리했습니다. 두 장을 나란히 걸었을 때 하나의 넓은 장면처럼 이어지도록 이미지 위치를 맞췄습니다."
+ },
+ "panel_v1_01.jpg": {
+  "concept": "첫 시안 (11.13)",
+  "desc": "주황 면에 회사 이름을 크게 쓰고 목업을 나란히 놓은 정보 중심 구성입니다. 무엇을 보여줄지는 정리됐지만 첫눈에 들어오는 장면이 약했습니다."
+ },
+ "panel_v1_02.jpg": {
+  "concept": "첫 시안 (11.13)",
+  "desc": "사진 위에 UNDER CONTROL 문구를 크게 얹어, 정보보다 분위기를 먼저 보여주는 방향을 시험했습니다."
+ },
+ "panel_v2_01.jpg": {
+  "concept": "사진과 타이포를 판넬 전체로 (11.16)",
+  "desc": "밤의 물류 현장 사진 위에 흰 글자를 판넬 가득 키웠습니다. 레퍼런스의 큰 타이포처럼 멀리서도 한눈에 들어오게 하려는 시도였습니다."
+ },
+ "panel_v2_02.jpg": {
+  "concept": "설명은 흰 바탕 그리드로 (11.16)",
+  "desc": "두 번째 판넬은 흰 바탕에 The Invisible Power Under Control 문구와 목업 그리드로 정리해, 첫 판넬과 강약을 나눴습니다."
+ },
+ "panel_v2_update_01.jpg": {
+  "concept": "시스템을 보여주는 판넬 (11.17)",
+  "desc": "현장 인물 사진과 컬러 팔레트, 적용 이미지를 한 판넬에 모아 브랜드 시스템이 한 번에 보이도록 정리했습니다."
+ },
+ "panel_v2_update_02.jpg": {
+  "concept": "로고와 그래픽 요소 정리 (11.17)",
+  "desc": "하늘을 배경으로 한 가림막 사진과 함께 로고 활용과 그래픽 요소를 정리한 판넬입니다."
+ },
+ "panel_v3_01.jpg": {
+  "concept": "읽는 순서를 정리한 최종시안 업데이트 (11.18)",
+  "desc": "헤드라인을 왼쪽 위로 올리고 정보 블록을 나눠, 판넬 앞에 선 사람이 위에서 아래로 자연스럽게 읽도록 순서를 정리했습니다."
+ },
+ "panel_v3_02.jpg": {
+  "concept": "최종 장면으로 이어진 시안 (11.18)",
+  "desc": "현장 인물과 건물, 트레일러가 함께 있는 합성 이미지를 처음 넣은 시안입니다. 이 장면 구성이 최종 판넬로 이어졌습니다."
+ }
+};
+/* REFS — 레퍼런스 이미지 (졸작/레퍼 = 도록, 졸작/판넬 레퍼런스 = 판넬) */
+const REFS = {
+  catalog: Array.from({length:30}, (_,i)=> `assets/refs/catalog/ref_${String(i+1).padStart(2,"0")}.jpg`),
+  panel:   Array.from({length:13}, (_,i)=> `assets/refs/panel/ref_${String(i+1).padStart(2,"0")}.jpg`)
+};
 const esc = s => String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
 const csFig = x => { const n = NOTES[x.src.split("/").pop()] || {};
-  return `<figure class="cs-fig rv"><img src="${x.src}" alt="${esc(x.t)}" loading="lazy" data-zoom="${x.src}" data-title="${esc(x.vt || x.l)}" data-concept="${esc(n.concept || x.c || "")}" data-desc="${esc(n.desc || x.d || x.t)}"><figcaption><b>${x.l}</b><span>${x.t}</span></figcaption></figure>`; };
+  return `<figure class="cs-fig rv"><img src="${x.src}" alt="${esc(x.t)}" loading="lazy" data-zoom="${x.src}" data-title="${esc(x.vt || x.l)}" data-concept="${esc(n.concept || x.c || "")}" data-desc="${esc(n.desc || x.d || x.t)}" data-refs="${x.refs || ""}"><figcaption><b>${x.l}</b><span>${x.t}</span></figcaption></figure>`; };
 function caseP1(){
   const pick = f => P1.filter(x=>x.f===f);
   const panels = pick("01_판넬"), spreads = pick("02_도록"), posters = pick("03_포스터·모션");
@@ -1436,7 +1535,7 @@ function caseP1(){
   const PV = [["panel_v1","판넬 1차","11.13"],["panel_v2","판넬 2차","11.16"],["panel_v2_update","2차 업데이트","11.17"],
               ["panel_v3","최종시안 업데이트","11.18"]]
     .map(([k,ko,d])=>({ko, d, pages:[byName(k+"_01.jpg"), byName(k+"_02.jpg")].filter(Boolean)}));
-  const panelFig = (x, label, cap, more={}) => csFig(Object.assign({}, x, {l:label, t:cap}, more));
+  const panelFig = (x, label, cap, more={}) => csFig(Object.assign({}, x, {l:label, t:cap, refs:"panel"}, more));
   return `<article class="cs"><div class="cs-in">
     <h1 class="cs-title">PORTFOLIO</h1>
     <p class="cs-lead">시각디자인 박정빈의 포트폴리오입니다.</p>
@@ -1462,7 +1561,7 @@ function caseP1(){
           `<div class="cs-grp"><h3 class="cs-sub">${ko}</h3>
            <p class="cs-grp-d">${desc}</p>
            <div class="cs-g2 cs-cat">${list.map(x=>{ const i = spreads.indexOf(x) + 1;
-             return csFig(Object.assign({}, x, {l: `${String(i).padStart(2,"0")} / ${String(spreads.length).padStart(2,"0")}`, vt: ko, c: desc, d: x.t})); }).join("")}</div></div>`).join("")}
+             return csFig(Object.assign({}, x, {l: `${String(i).padStart(2,"0")} / ${String(spreads.length).padStart(2,"0")}`, vt: ko, c: desc, d: x.t, refs:"catalog"})); }).join("")}</div></div>`).join("")}
       </div>
     </section>
 
@@ -1487,7 +1586,7 @@ function caseP1(){
         <dl class="cs-contact"><dt>연락</dt><dd><a href="tel:${ME.phone.replace(/-/g,"")}">${ME.phone}</a></dd><dt>인스타그램</dt><dd><a href="https://www.instagram.com/${ME.insta.toLowerCase()}/" target="_blank" rel="noopener">@${ME.insta}</a></dd></dl>
       </div>
     </section>
-  </div><div class="cs-vw" aria-hidden="true"><div class="vw-top"><button class="vw-back" data-vw-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M15 18l-6-6 6-6"/></svg>목록으로</button><b class="vw-part"></b><span class="vw-count"></span></div><div class="vw-stage"><button class="vw-nav" data-vw="-1" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M15 18l-6-6 6-6"/></svg></button><img alt=""><button class="vw-nav" data-vw="1" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="vw-info"><h3 class="vw-title"></h3><dl><dt>콘셉트</dt><dd class="vw-concept"></dd><dt>설명</dt><dd class="vw-desc"></dd></dl></div></div></article>`;
+  </div><div class="cs-vw" aria-hidden="true"><div class="vw-top"><button class="vw-back" data-vw-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M15 18l-6-6 6-6"/></svg>목록으로</button><b class="vw-part"></b><span class="vw-count"></span></div><div class="vw-stage"><button class="vw-nav" data-vw="-1" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M15 18l-6-6 6-6"/></svg></button><img alt=""><button class="vw-nav" data-vw="1" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="vw-info"><h3 class="vw-title"></h3><dl><dt>콘셉트</dt><dd class="vw-concept"></dd><dt>설명</dt><dd class="vw-desc"></dd></dl><div class="vw-refs"><h4>레퍼런스<span class="vw-refn"></span></h4><div class="vw-rl"></div></div></div></div></article>`;
 }
 
 /* ---------- explorer (Windows-style folder window) ---------- */
@@ -2058,6 +2157,13 @@ function render(it){
       vw.querySelector(".vw-title").textContent = im.dataset.title;
       vw.querySelector(".vw-concept").textContent = im.dataset.concept;
       vw.querySelector(".vw-desc").textContent = im.dataset.desc;
+      const refs = REFS[im.dataset.refs] || [], rb = vw.querySelector(".vw-refs");
+      rb.hidden = !refs.length;
+      if (rb.dataset.g !== im.dataset.refs){           // same part = same reference set, so only rebuild when the part changes
+        rb.dataset.g = im.dataset.refs;
+        vw.querySelector(".vw-refn").textContent = refs.length ? `${refs.length}장` : "";
+        vw.querySelector(".vw-rl").innerHTML = refs.map((r,k)=>`<a href="${r}" target="_blank" rel="noopener" title="레퍼런스 ${k+1}"><img src="${r}" alt="레퍼런스 ${k+1}" loading="lazy"></a>`).join("");
+      }
       vw.querySelector('[data-vw="-1"]').disabled = idx === 0;
       vw.querySelector('[data-vw="1"]').disabled = idx === list.length-1;
       // warm up the neighbours so the arrows feel instant
