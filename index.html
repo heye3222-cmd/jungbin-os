@@ -991,6 +991,14 @@ body.paging #desk{transform:none;opacity:.55}
   .cs-h b{font-size:24px}
   .cs-txt{font-size:15px}
 }
+/* ---------- bold for the single-weight KOTRA Gothic: a tight ring of same-colour shadows ---------- */
+:root{--fb-l:0.0200em 0.0000em 0,0.0185em 0.0077em 0,0.0141em 0.0141em 0,0.0077em 0.0185em 0,0.0000em 0.0200em 0,-0.0077em 0.0185em 0,-0.0141em 0.0141em 0,-0.0185em 0.0077em 0,-0.0200em 0.0000em 0,-0.0185em -0.0077em 0,-0.0141em -0.0141em 0,-0.0077em -0.0185em 0,-0.0000em -0.0200em 0,0.0077em -0.0185em 0,0.0141em -0.0141em 0,0.0185em -0.0077em 0,0.0092em 0.0038em 0,0.0039em 0.0092em 0,-0.0038em 0.0092em 0,-0.0092em 0.0039em 0,-0.0092em -0.0038em 0,-0.0039em -0.0092em 0,0.0038em -0.0092em 0,0.0092em -0.0039em 0;--fb-s:0.0140em 0.0000em 0,0.0121em 0.0070em 0,0.0070em 0.0121em 0,0.0000em 0.0140em 0,-0.0070em 0.0121em 0,-0.0121em 0.0070em 0,-0.0140em 0.0000em 0,-0.0121em -0.0070em 0,-0.0070em -0.0121em 0,-0.0000em -0.0140em 0,0.0070em -0.0121em 0,0.0121em -0.0070em 0}
+.cs-title,.cs-pname,.cs-quote{text-shadow:var(--fb-l)}
+.cs-h b{font-weight:700}
+.cs-title{letter-spacing:-.015em}
+.cs-pname{letter-spacing:0}
+.cs-h b{letter-spacing:0}
+.cs-quote{letter-spacing:-.01em}
 /* phones: no pull-to-refresh / double-tap zoom fighting the desktop */
 html,body{overscroll-behavior:none}
 body{touch-action:manipulation}
