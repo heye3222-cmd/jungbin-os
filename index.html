@@ -846,7 +846,7 @@ body.paging #desk{transform:none;opacity:.55}
 .wdg-np button{width:38px;height:38px;border-radius:50%;background:var(--fg);color:#000;display:grid;place-items:center;flex:none}
 .wdg-np button:hover{background:var(--acid)}
 .wdg-np button svg{width:16px;height:16px}
-@media (max-width:1100px){ #hero{left:50%} #wdgs{display:none} }
+@media (max-width:1260px){ #hero{left:50%} #wdgs{display:none} }
 @media (max-width:640px){
   #hero{bottom:96px} .hero-sub{letter-spacing:.25em;font-size:10px}
   /* phone taskbar: start + a few apps only (folders are already on the home screen) */
@@ -857,7 +857,7 @@ body.paging #desk{transform:none;opacity:.55}
 }
 /* ---------- 자기소개 post-it: square dark note, plain type ---------- */
 #memo{position:absolute;left:128px;top:24px;z-index:4;display:flex;animation:iconfade .5s ease both}
-.pit{position:relative;width:760px;display:flex;flex-direction:column;color:#F2F2F2;font-family:var(--kr);
+.pit{position:relative;width:800px;display:flex;flex-direction:column;color:#F2F2F2;font-family:var(--kr);
   background:rgba(22,22,22,.72);border:1px solid rgba(255,255,255,.12);border-radius:0;overflow:hidden;
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .lite .pit{background:#161616}
@@ -871,9 +871,12 @@ body.paging #desk{transform:none;opacity:.55}
 .note-bar .sp{flex:1}
 #memo.min .note-tx{display:none}
 .note-tx{flex:1;display:grid;grid-template-columns:1fr 1fr;font-size:14px;line-height:1.7;user-select:text}
-.note-tx:has(.nt-ph){grid-template-columns:140px 1fr 1fr}
-.nt-ph{padding:18px 0 18px 20px}
-.nt-ph img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border:1px solid rgba(255,255,255,.14);background:#222}
+.note-tx:has(.nt-ph){grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+/* photo + profile text share one block: photo top = "프로필" top, photo bottom = last info row */
+.nt-me{display:flex;gap:20px;align-items:stretch;align-self:start}
+.nt-ph{flex:none;width:150px}
+.nt-ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;border:1px solid rgba(255,255,255,.14);background:#222}
+.nt-pt{flex:1;min-width:0}
 .nt-col{padding:18px 22px 22px;min-width:0}
 .nt-col+.nt-col{border-left:1px solid rgba(255,255,255,.1)}
 .note-tx h3{font-size:12.5px;font-weight:400;color:rgba(255,255,255,.5);margin:20px 0 8px}
@@ -894,9 +897,11 @@ body.paging #desk{transform:none;opacity:.55}
   #memo{left:0 !important;top:122px !important;right:0;bottom:8px;padding:4px 12px 14px;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
   .pit{width:auto;flex:none}
   .note-bar{cursor:default}
-  .note-tx,.note-tx:has(.nt-ph){grid-template-columns:96px 1fr;font-size:13.5px;line-height:1.6}
+  .note-tx,.note-tx:has(.nt-ph){grid-template-columns:1fr;font-size:13.5px;line-height:1.6}
+  .nt-me{gap:14px;align-items:flex-start}
+  .nt-ph{width:92px}
+  .nt-ph img{height:auto;aspect-ratio:3/4}
   .note-tx .nt-col:last-child{grid-column:1/-1}
-  .nt-ph{padding:14px 0 0 16px}
   .nt-col{padding:14px 16px}
   .nt-col+.nt-col{border-left:0;border-top:1px solid rgba(255,255,255,.1)}
   .note-tx:not(:has(.nt-ph)){grid-template-columns:1fr}
@@ -1837,10 +1842,10 @@ function overTrash(ev, group){
 
 /* 자기소개 post-its on the desktop — filled from ME; the pair moves together by either bar */
 (function notes(){
-  document.getElementById("note1tx").innerHTML = `${ME.photos[0] ? `<div class="nt-ph"><img src="${ME.photos[0]}" alt="${ME.nameKo} 사진"></div>` : ""}<div class="nt-col"><h3>프로필</h3>
+  document.getElementById("note1tx").innerHTML = `<div class="nt-col nt-me">${ME.photos[0] ? `<div class="nt-ph"><img src="${ME.photos[0]}" alt="${ME.nameKo} 사진"></div>` : ""}<div class="nt-pt"><h3>프로필</h3>
     <h2>${ME.nameKo}<span>${ME.nameEn}</span></h2>
     ${ME.oneLine ? `<p class="one">${ME.oneLine}</p>` : ""}
-    <dl><dt>분야</dt><dd>${ME.role}</dd><dt>학교</dt><dd>${ME.school}</dd><dt>지역</dt><dd>${ME.city}</dd><dt>생년월일</dt><dd>${ME.birth}</dd><dt>상태</dt><dd>${ME.status}</dd></dl></div>
+    <dl><dt>분야</dt><dd>${ME.role}</dd><dt>학교</dt><dd>${ME.school}</dd><dt>지역</dt><dd>${ME.city}</dd><dt>생년월일</dt><dd>${ME.birth}</dd><dt>상태</dt><dd>${ME.status}</dd></dl></div></div>
     <div class="nt-col"><h3>키워드</h3>
     <ul>${ME.keywords.map(([k,l])=>`<li><b>${k}</b><em>${l}</em></li>`).join("")}</ul>
     <h3>스킬</h3>
