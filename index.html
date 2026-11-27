@@ -922,6 +922,13 @@ body.paging #desk{transform:none;opacity:.55}
 .cs-title{margin-top:18px;font-family:var(--sans);font-weight:800;font-size:clamp(52px,10vw,136px);line-height:.88;letter-spacing:-.065em}
 .cs-title-ko{font-family:var(--kr);font-weight:800;font-size:clamp(36px,5.6vw,80px);line-height:1.15;letter-spacing:-.045em}
 .cs-meta dd b{font-weight:700;color:#fff}
+.cs-proj{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-top:56px;padding-top:28px;border-top:1px solid rgba(255,255,255,.14)}
+.cs-proj span{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:rgba(255,255,255,.5)}
+.cs-proj b{font-family:var(--sans);font-size:clamp(26px,3.4vw,40px);font-weight:800;letter-spacing:-.04em}
+.cs-proj em{font-style:normal;font-size:13px;color:rgba(255,255,255,.55)}
+.cs-intro{margin-top:14px}
+.cs-pname{font-family:var(--sans);font-size:clamp(26px,3vw,36px);font-weight:800;letter-spacing:-.04em;margin-bottom:12px}
+.cs-dim{margin-top:10px;font-size:14px;color:rgba(255,255,255,.6)}
 .cs-lead{margin-top:22px;max-width:640px;font-size:clamp(16px,1.7vw,20px);line-height:1.6;color:rgba(255,255,255,.82)}
 .cs-fig{margin:0}
 .cs-fig img,.cs-fig video{display:block;width:100%;height:auto;border-radius:4px;background:#151515}
@@ -929,7 +936,7 @@ body.paging #desk{transform:none;opacity:.55}
 .cs-fig figcaption{margin-top:10px;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.55);display:flex;gap:12px}
 .cs-fig figcaption b{font-family:var(--mono);font-size:11px;font-weight:500;color:#fff;letter-spacing:.06em;flex:none}
 .cs-hero{margin-top:44px}
-.cs-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:48px;border-top:1px solid rgba(255,255,255,.14)}
+.cs-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:32px;border-top:1px solid rgba(255,255,255,.14)}
 .cs-meta div{padding:18px 18px 20px 0;border-bottom:1px solid rgba(255,255,255,.14)}
 .cs-meta .w2{grid-column:span 2}
 .cs-meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:rgba(255,255,255,.45)}
@@ -1116,7 +1123,7 @@ body{touch-action:manipulation}
     <div class="pins" id="pins"></div>
     <h5>추천 <span>recommended</span></h5>
     <div class="recs">
-      <button class="rec" data-go="p1"><i>01</i><div><b>UNDER CONTROL</b><span>project_01 · PFA 리브랜딩</span></div></button>
+      <button class="rec" data-go="p1"><i>01</i><div><b>포트폴리오</b><span>박정빈 · 2026</span></div></button>
       <button class="rec" data-go="music"><i>fm</i><div><b>JB.fm</b><span>음악 듣기</span></div></button>
     </div>
   </div>
@@ -1372,9 +1379,11 @@ function caseP1(){
     .map(([k,ko,d])=>({ko, d, pages:[byName(k+"_01.jpg"), byName(k+"_02.jpg")].filter(Boolean)}));
   const panelFig = (x, label, cap) => csFig(Object.assign({}, x, {l:label, t:cap}));
   return `<article class="cs"><div class="cs-in">
-    <div class="cs-eye"><b>JUNGBIN PARK</b><span>PROJECT 01</span><span>UNDER CONTROL</span><span>2026</span></div>
-    <h1 class="cs-title cs-title-ko">멈춰 있는 브랜드에<br>움직임을 더하다</h1>
-    <p class="cs-lead">PFA 리브랜딩 팀 프로젝트 ‘UNDER CONTROL’에서 저는 브랜드가 실제로 쓰이는 장면을 맡았습니다.
+    <div class="cs-eye"><b>JUNGBIN PARK</b><span>VISUAL DESIGN</span><span>2026</span></div>
+    <h1 class="cs-title cs-title-ko">포트폴리오</h1>
+    <p class="cs-lead">시각디자인 박정빈의 포트폴리오입니다.<br>${ME.oneLine}.</p>
+    <div class="cs-proj"><span>PROJECT 01</span><b>UNDER CONTROL</b><em>졸업작품 · 팀 프로젝트 · PFA 리브랜딩</em></div>
+    <p class="cs-txt cs-intro">팀 프로젝트 ‘UNDER CONTROL’에서 저는 브랜드가 실제로 쓰이는 장면을 맡았습니다.
       졸업전시 판넬을 다섯 번 고쳐 완성하고, 로고의 막대에서 픽토그램과 안내 사인을 만들고,
       업무 인쇄물과 산업현장 도록 페이지를 펼치고, 멈춰 있던 포스터를 8초짜리 모션으로 움직였습니다.</p>
     <dl class="cs-meta">
@@ -1388,10 +1397,12 @@ function caseP1(){
 
     <section class="cs-sec" id="cs-poster">
       <div class="cs-h">01<b>포스터</b><i>POSTER · MOTION POSTER</i></div>
-      <p class="cs-txt rv">빛과 그림자로 읽히는 포스터를 만들고, 빛이 들어왔다 빠지며 그림자가 길어지는 8초 모션포스터로 움직였습니다. 모션포스터는 AR 전시에 사용했습니다.</p>
+      <div class="rv"><h3 class="cs-pname">UNDER LIGHT</h3>
+        <p class="cs-txt">평소엔 잘 들춰보지 않던 ‘안전’이란 것이, 불을 비추면 잘 드러난다는 의미를 가진 포스터입니다.</p>
+        <p class="cs-txt cs-dim">이 포스터를 빛이 들어왔다 빠지며 그림자가 길어지는 8초 모션포스터로 움직여 AR 전시에 사용했습니다.</p></div>
       <div class="cs-full cs-g2 cs-posters">
-        ${csFig(posters.find(x=>x.n==="PFA_poster.jpg"))}
-        <figure class="cs-fig rv"><video src="assets/p1/poster/motion_poster.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption><b>MOTION POSTER</b><span>8초 모션포스터 (AR 전시용)</span></figcaption></figure>
+        ${csFig(Object.assign({}, posters.find(x=>x.n==="PFA_poster.jpg"), {l:"UNDER LIGHT", t:"포스터"}))}
+        <figure class="cs-fig rv"><video src="assets/p1/poster/motion_poster.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption><b>UNDER LIGHT · MOTION</b><span>8초 모션포스터 (AR 전시용)</span></figcaption></figure>
       </div>
     </section>
 
@@ -1693,7 +1704,7 @@ const setRow = (ic, label, val, sub="") =>
   `<div class="set-row"><span class="ic">${GL[ic]}</span><div class="lb">${label}${sub ? `<small>${sub}</small>` : ""}</div><span class="vl">${val}</span></div>`;
 
 const ITEMS = [
-  { id:"p1", name:"Project_01", tile:tileOf("p1"), c:PROJECTS.p1.c, path:"~/projects/01", cs:true, page:()=>caseP1()},
+  { id:"p1", name:"포트폴리오", tile:tileOf("p1"), c:PROJECTS.p1.c, path:"~/portfolio", cs:true, page:()=>caseP1()},
 
   { id:"music", name:"JB.fm", app:true, c:"#D6FF3D",
     tile:tileOf("music") }
@@ -1999,7 +2010,7 @@ function render(it){
     page.querySelectorAll("[data-zoom]").forEach(im=> im.onclick = ()=>{ lb.querySelector("img").src = im.dataset.zoom; lb.style.top = main.scrollTop+"px"; lb.style.height = main.clientHeight+"px"; lb.classList.add("on"); });
     lb.onclick = ()=> lb.classList.remove("on");
     main.addEventListener("scroll", ()=> lb.classList.remove("on"), {passive:true});
-    page.querySelector(".w-status span").textContent = `UNDER CONTROL · 작업 ${page.querySelectorAll(".cs-fig").length}개`;
+    page.querySelector(".w-status span").textContent = `포트폴리오 · 작업 ${page.querySelectorAll(".cs-fig").length}개`;
     page.querySelectorAll("[data-jump]").forEach(b=> b.onclick = ()=>{ const s = page.querySelector("#"+b.dataset.jump); if (s) main.scrollTo({top: s.offsetTop - 12, behavior:"smooth"}); });
   }
   // me.exe: thumbnails swap the big photo
