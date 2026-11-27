@@ -817,9 +817,10 @@ body.paging #desk{transform:none;opacity:.55}
 /* ---------- desktop, a bit more personal: brand wallpaper + widgets + lime folders ---------- */
 #mono{display:none}
 /* name sits low on the wallpaper, plain white */
-#hero{position:absolute;left:43%;bottom:7vh;transform:translateX(-50%);text-align:center;pointer-events:none;user-select:none}
-.hero-word{font-weight:800;font-size:clamp(72px,12vw,200px);line-height:.9;letter-spacing:-.065em;color:#FFFFFF;text-shadow:0 10px 30px rgba(0,0,0,.3)}
-.hero-sub{margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.42em;color:rgba(255,255,255,.7)}
+#hero{position:absolute;left:clamp(20px,2.4vw,40px);bottom:clamp(18px,3vh,36px);text-align:left;pointer-events:none;user-select:none}
+/* KOTRA Gothic has one weight: a ring of tight white shadows thickens it evenly into a bold */
+.hero-word{font-weight:700;font-size:clamp(96px,15vw,280px);line-height:.86;letter-spacing:-.01em;color:#FFFFFF;text-shadow:0.0220em 0.0000em 0 #FFFFFF,0.0203em 0.0084em 0 #FFFFFF,0.0156em 0.0156em 0 #FFFFFF,0.0084em 0.0203em 0 #FFFFFF,0.0000em 0.0220em 0 #FFFFFF,-0.0084em 0.0203em 0 #FFFFFF,-0.0156em 0.0156em 0 #FFFFFF,-0.0203em 0.0084em 0 #FFFFFF,-0.0220em 0.0000em 0 #FFFFFF,-0.0203em -0.0084em 0 #FFFFFF,-0.0156em -0.0156em 0 #FFFFFF,-0.0084em -0.0203em 0 #FFFFFF,-0.0000em -0.0220em 0 #FFFFFF,0.0084em -0.0203em 0 #FFFFFF,0.0156em -0.0156em 0 #FFFFFF,0.0203em -0.0084em 0 #FFFFFF,0.0102em 0.0042em 0 #FFFFFF,0.0042em 0.0102em 0 #FFFFFF,-0.0042em 0.0102em 0 #FFFFFF,-0.0102em 0.0042em 0 #FFFFFF,-0.0102em -0.0042em 0 #FFFFFF,-0.0042em -0.0102em 0 #FFFFFF,0.0042em -0.0102em 0 #FFFFFF,0.0102em -0.0042em 0 #FFFFFF,0 10px 30px rgba(0,0,0,.35);margin-left:-.02em}
+.hero-sub{margin-top:18px;padding-left:.2em;font-family:var(--mono);font-size:13px;letter-spacing:.42em;color:rgba(255,255,255,.7)}
 .hero-sub b{color:#FFFFFF;font-weight:500}
 /* widgets (right column) */
 #wdgs{position:absolute;right:22px;top:22px;width:290px;display:flex;flex-direction:column;gap:12px;z-index:3}
@@ -846,7 +847,7 @@ body.paging #desk{transform:none;opacity:.55}
 .wdg-np button{width:38px;height:38px;border-radius:50%;background:var(--fg);color:#000;display:grid;place-items:center;flex:none}
 .wdg-np button:hover{background:var(--acid)}
 .wdg-np button svg{width:16px;height:16px}
-@media (max-width:1260px){ #hero{left:50%} #wdgs{display:none} }
+@media (max-width:1260px){ #wdgs{display:none} }
 @media (max-width:640px){
   #hero{bottom:96px} .hero-sub{letter-spacing:.25em;font-size:10px}
   /* phone taskbar: start + a few apps only (folders are already on the home screen) */
