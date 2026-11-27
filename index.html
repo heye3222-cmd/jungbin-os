@@ -826,7 +826,10 @@ body.paging #desk{transform:none;opacity:.55}
 #wdgs{position:absolute;right:22px;top:22px;width:290px;display:flex;flex-direction:column;gap:12px;z-index:3}
 .wdg{border-radius:20px;background:rgba(22,22,22,.55);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(26px) saturate(1.3);-webkit-backdrop-filter:blur(26px) saturate(1.3);padding:16px 18px;box-shadow:0 14px 40px rgba(0,0,0,.25)}
 .lite .wdg{background:#151A2C}
-.wc-t{font-size:56px;font-weight:600;letter-spacing:-.05em;line-height:1}
+.wc-t{font-size:56px;font-weight:600;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums;display:flex;align-items:baseline}
+.wc-c{display:inline-block;margin:0 .02em;transition:opacity .18s ease}
+.wc-c.off{opacity:.15}
+.wc-t small{font-size:22px;font-weight:500;letter-spacing:0;margin-left:8px;color:rgba(255,255,255,.55)}
 .wc-d{font-family:var(--kr);font-size:13px;color:rgba(242,239,232,.75);margin-top:6px}
 .wc-f{display:flex;justify-content:space-between;margin-top:12px;font-family:var(--mono);font-size:10.5px;color:var(--dim)}
 .wc-f b{color:var(--acid);font-weight:500}
@@ -985,9 +988,34 @@ body.paging #desk{transform:none;opacity:.55}
 .cs-btn:hover{background:#fff}
 .cs-btn.ghost{background:none;color:#F2F2F2;border:1px solid rgba(255,255,255,.25)}
 .cs-btn.ghost:hover{background:rgba(255,255,255,.08)}
-.cs-lb{position:absolute;left:0;right:0;top:0;z-index:40;display:none;place-items:center;padding:24px;background:rgba(0,0,0,.92);cursor:zoom-out}
-.cs-lb.on{display:grid}
-.cs-lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:3px}
+/* click-through viewer: big picture, arrows to the sides, concept + description underneath */
+.cs-vw{position:absolute;left:0;right:0;top:0;z-index:40;display:none;flex-direction:column;background:#0B0D14}
+.cs-vw.on{display:flex}
+.vw-top{flex:none;height:52px;display:flex;align-items:center;gap:16px;padding:0 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+.vw-back{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px 0 10px;border:1px solid rgba(255,255,255,.2);color:#F2F2F2;font-size:14px}
+.vw-back svg{width:16px;height:16px}
+.vw-back:hover{background:rgba(255,255,255,.08)}
+.vw-part{font-size:15px;font-weight:600}
+.vw-count{margin-left:auto;font-size:14px;color:rgba(255,255,255,.55);font-variant-numeric:tabular-nums}
+.vw-stage{flex:1;min-height:0;display:grid;grid-template-columns:60px minmax(0,1fr) 60px;align-items:center;gap:14px;padding:18px 18px 14px}
+.vw-stage img{width:100%;height:100%;min-height:0;object-fit:contain;display:block}
+.vw-nav{width:60px;height:60px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.04);color:#fff}
+.vw-nav svg{width:26px;height:26px}
+.vw-nav:hover:not(:disabled){background:var(--acid);border-color:var(--acid);color:#fff}
+.vw-nav:disabled{opacity:.2;cursor:default}
+.vw-info{flex:none;padding:16px 92px 22px;border-top:1px solid rgba(255,255,255,.1)}
+.vw-title{font-size:19px;font-weight:600;margin-bottom:10px}
+.vw-info dl{display:grid;grid-template-columns:64px 1fr;gap:6px 14px;font-size:15px;line-height:1.65}
+.vw-info dt{color:rgba(255,255,255,.5)}
+.vw-info dd{color:rgba(255,255,255,.88)}
+@media (max-width:760px){
+  .vw-top{padding:0 12px;gap:10px}
+  .vw-stage{grid-template-columns:40px minmax(0,1fr) 40px;gap:6px;padding:12px 8px}
+  .vw-nav{width:40px;height:56px}
+  .vw-info{padding:12px 16px 16px}
+  .vw-title{font-size:17px}
+  .vw-info dl{font-size:14px}
+}
 @media (max-width:900px){ .cs-g4{grid-template-columns:repeat(2,minmax(0,1fr))} .cs-three{grid-template-columns:1fr} }
 @media (max-width:760px){
   .cs-sec{grid-template-columns:1fr;padding-top:48px;margin-top:48px;row-gap:18px}
@@ -1091,7 +1119,7 @@ body{touch-action:manipulation}
     <article class="pit" id="note1"><div class="note-bar"><span class="nb-t">자기소개</span><span class="sp"></span><button data-m aria-label="접기"><svg viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="currentColor" stroke-width="1.4"/></svg></button></div><div class="note-tx" id="note1tx"></div></article>
   </section>
   <div id="wdgs">
-    <section class="wdg"><div class="wc-t" id="wct">--:--</div><div class="wc-d" id="wcd"></div><div class="wc-f"><span>JUNGBIN OS</span><span>박정빈</span></div></section>
+    <section class="wdg"><div class="wc-t" id="wct"><span id="wch">--</span><span class="wc-c" id="wcc">:</span><span id="wcm">--</span><small id="wcs">--</small></div><div class="wc-d" id="wcd"></div><div class="wc-f"><span>JUNGBIN OS</span><span>박정빈</span></div></section>
     <section class="wdg wdg-np" id="wnp"><img id="wnpimg" alt="" style="display:none"><div><b id="wnpt">Playlist</b></div>
       <button id="wnpbtn" aria-label="재생"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></section>
   </div>
@@ -1383,7 +1411,12 @@ const FS = {
 };
 
 /* ---------- Project_01 case study: everything in one scroll ---------- */
-const csFig = x => `<figure class="cs-fig rv"><img src="${x.src}" alt="${x.t}" loading="lazy" data-zoom="${x.src}"><figcaption><b>${x.l}</b><span>${x.t}</span></figcaption></figure>`;
+/* NOTES — 각 이미지의 콘셉트/설명을 직접 적는 곳. 파일 이름을 키로 쓰면 아래 기본 문구 대신 이게 보여요.
+   예: "spread_01_pictogram.jpg": {concept:"…", desc:"…"} */
+const NOTES = {};
+const esc = s => String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+const csFig = x => { const n = NOTES[x.src.split("/").pop()] || {};
+  return `<figure class="cs-fig rv"><img src="${x.src}" alt="${esc(x.t)}" loading="lazy" data-zoom="${x.src}" data-title="${esc(x.vt || x.l)}" data-concept="${esc(n.concept || x.c || "")}" data-desc="${esc(n.desc || x.d || x.t)}"><figcaption><b>${x.l}</b><span>${x.t}</span></figcaption></figure>`; };
 function caseP1(){
   const pick = f => P1.filter(x=>x.f===f);
   const panels = pick("01_판넬"), spreads = pick("02_도록"), posters = pick("03_포스터·모션");
@@ -1393,7 +1426,7 @@ function caseP1(){
   const PV = [["panel_v1","판넬 1차","11.13"],["panel_v2","판넬 2차","11.16"],["panel_v2_update","2차 업데이트","11.17"],
               ["panel_v3","최종시안 업데이트","11.18"]]
     .map(([k,ko,d])=>({ko, d, pages:[byName(k+"_01.jpg"), byName(k+"_02.jpg")].filter(Boolean)}));
-  const panelFig = (x, label, cap) => csFig(Object.assign({}, x, {l:label, t:cap}));
+  const panelFig = (x, label, cap, more={}) => csFig(Object.assign({}, x, {l:label, t:cap}, more));
   return `<article class="cs"><div class="cs-in">
     <h1 class="cs-title">PORTFOLIO</h1>
     <p class="cs-lead">시각디자인 박정빈의 포트폴리오입니다.</p>
@@ -1404,7 +1437,7 @@ function caseP1(){
         <p class="cs-txt">평소엔 잘 들춰보지 않던 ‘안전’이란 것이, 불을 비추면 잘 드러난다는 의미를 가진 포스터입니다.</p>
         <p class="cs-txt cs-dim">이 포스터를 빛이 들어왔다 빠지며 그림자가 길어지는 8초 모션포스터로 움직여 AR 전시에 사용했습니다.</p></div>
       <div class="cs-full cs-g2 cs-posters">
-        ${csFig(Object.assign({}, posters.find(x=>x.n==="PFA_poster.jpg"), {l:"UNDER LIGHT", t:"포스터"}))}
+        ${csFig(Object.assign({}, posters.find(x=>x.n==="PFA_poster.jpg"), {l:"UNDER LIGHT", t:"포스터", vt:"UNDER LIGHT", c:"평소엔 잘 들춰보지 않던 ‘안전’이란 것이, 불을 비추면 잘 드러난다는 의미를 가진 포스터입니다.", d:"빛과 그림자로 읽히는 포스터. 같은 장면을 8초 모션포스터로도 만들어 AR 전시에 사용했습니다."}))}
         <figure class="cs-fig rv"><video src="assets/p1/poster/motion_poster.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption><b>UNDER LIGHT MOTION</b><span>8초 모션포스터 (AR 전시용)</span></figcaption></figure>
       </div>
     </section>
@@ -1419,7 +1452,7 @@ function caseP1(){
           `<div class="cs-grp"><h3 class="cs-sub">${ko}</h3>
            <p class="cs-grp-d">${desc}</p>
            <div class="cs-g2 cs-cat">${list.map(x=>{ const i = spreads.indexOf(x) + 1;
-             return csFig(Object.assign({}, x, {l: `${String(i).padStart(2,"0")} / ${String(spreads.length).padStart(2,"0")}`})); }).join("")}</div></div>`).join("")}
+             return csFig(Object.assign({}, x, {l: `${String(i).padStart(2,"0")} / ${String(spreads.length).padStart(2,"0")}`, vt: ko, c: desc, d: x.t})); }).join("")}</div></div>`).join("")}
       </div>
     </section>
 
@@ -1428,11 +1461,11 @@ function caseP1(){
       <p class="cs-txt rv">졸업전시에 걸린 판넬 두 장. 11월 13일 1차부터 19일 최종까지, 레이아웃과 사진 비중, 정보 배치를 다섯 번 다시 잡았습니다.</p>
       <div class="cs-full">
         <div class="cs-grp"><h3 class="cs-sub">최종 판넬<span>11.19</span></h3>
-          <div class="cs-g2 cs-cat">${panels.map((x,i)=>panelFig(x, `FINAL 0${i+1}`, i ? "판넬 2 — 배경, 시스템, 로고 콘셉트, 슬로건" : "판넬 1 — 브랜드 소개와 현장 적용 이미지")).join("")}</div></div>
+          <div class="cs-g2 cs-cat">${panels.map((x,i)=>panelFig(x, `FINAL 0${i+1}`, i ? "판넬 2 — 배경, 시스템, 로고 콘셉트, 슬로건" : "판넬 1 — 브랜드 소개와 현장 적용 이미지", {vt:`최종 판넬 ${i+1}`, c:"졸업전시에 실제로 걸린 최종 판넬 (11.19)", d: i ? "배경, 시스템, 로고 콘셉트, 슬로건을 한 장에 정리했습니다." : "브랜드 소개와 현장 적용 이미지를 한 장에 담았습니다."})).join("")}</div></div>
         <div class="cs-grp"><h3 class="cs-sub">작업 과정</h3>
           <p class="cs-grp-d">최종까지 거쳐 온 시안들을 날짜 순서대로 놓았습니다.</p>
           ${PV.map((v,i)=>`<div class="cs-ver"><div class="cs-ver-h"><b>0${i+1}</b><span>${v.ko}</span><em>${v.d}</em></div>
-            <div class="cs-g2 cs-cat">${v.pages.map((x,j)=>panelFig(x, `0${i+1}-${j+1}`, `${v.ko} — 판넬 ${j+1}`)).join("")}</div></div>`).join("")}
+            <div class="cs-g2 cs-cat">${v.pages.map((x,j)=>panelFig(x, `0${i+1}-${j+1}`, `${v.ko} — 판넬 ${j+1}`, {vt:`${v.ko} — 판넬 ${j+1}`, c:`최종까지 거쳐 온 시안 (${v.d})`, d:`${v.d}에 만든 ${v.ko} 시안의 판넬 ${j+1}입니다.`})).join("")}</div></div>`).join("")}
         </div>
       </div>
     </section>
@@ -1444,7 +1477,7 @@ function caseP1(){
         <dl class="cs-contact"><dt>연락</dt><dd><a href="tel:${ME.phone.replace(/-/g,"")}">${ME.phone}</a></dd><dt>인스타그램</dt><dd><a href="https://www.instagram.com/${ME.insta.toLowerCase()}/" target="_blank" rel="noopener">@${ME.insta}</a></dd></dl>
       </div>
     </section>
-  </div><div class="cs-lb" aria-hidden="true"><img alt=""></div></article>`;
+  </div><div class="cs-vw" aria-hidden="true"><div class="vw-top"><button class="vw-back" data-vw-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M15 18l-6-6 6-6"/></svg>목록으로</button><b class="vw-part"></b><span class="vw-count"></span></div><div class="vw-stage"><button class="vw-nav" data-vw="-1" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M15 18l-6-6 6-6"/></svg></button><img alt=""><button class="vw-nav" data-vw="1" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="vw-info"><h3 class="vw-title"></h3><dl><dt>콘셉트</dt><dd class="vw-concept"></dd><dt>설명</dt><dd class="vw-desc"></dd></dl></div></div></article>`;
 }
 
 /* ---------- explorer (Windows-style folder window) ---------- */
@@ -2001,11 +2034,41 @@ function render(it){
   const xp = page.querySelector(".xp");
   if (xp) mountExplorer(xp, it);
   // case study: click a picture to see it big, click again to close
-  const lb = page.querySelector(".cs-lb");
-  if (lb){
-    page.querySelectorAll("[data-zoom]").forEach(im=> im.onclick = ()=>{ lb.querySelector("img").src = im.dataset.zoom; lb.style.top = main.scrollTop+"px"; lb.style.height = main.clientHeight+"px"; lb.classList.add("on"); });
-    lb.onclick = ()=> lb.classList.remove("on");
-    main.addEventListener("scroll", ()=> lb.classList.remove("on"), {passive:true});
+  const vw = page.querySelector(".cs-vw");
+  if (vw){
+    // click a panel / catalog page -> it opens big in this window; arrows (or ← → keys, or a swipe) go to the next one in the same part
+    let list = [], idx = 0, lockTop = 0;
+    const pad = n => String(n).padStart(2,"0");
+    const fit = ()=>{ vw.style.top = lockTop+"px"; vw.style.height = main.clientHeight+"px"; };
+    const show = ()=>{
+      const im = list[idx];
+      vw.querySelector(".vw-stage img").src = im.dataset.zoom;
+      vw.querySelector(".vw-stage img").alt = im.alt;
+      vw.querySelector(".vw-count").textContent = `${pad(idx+1)} / ${pad(list.length)}`;
+      vw.querySelector(".vw-title").textContent = im.dataset.title;
+      vw.querySelector(".vw-concept").textContent = im.dataset.concept;
+      vw.querySelector(".vw-desc").textContent = im.dataset.desc;
+      vw.querySelector('[data-vw="-1"]').disabled = idx === 0;
+      vw.querySelector('[data-vw="1"]').disabled = idx === list.length-1;
+      // warm up the neighbours so the arrows feel instant
+      [idx-1, idx+1].forEach(k=>{ if (list[k]) { const pre = new Image(); pre.src = list[k].dataset.zoom; } });
+    };
+    vw._go = d => { const n = idx + d; if (n < 0 || n >= list.length) return; idx = n; show(); };
+    vw._close = ()=>{ vw.classList.remove("on"); main.style.overflow = ""; };
+    page.querySelectorAll(".cs-sec").forEach(sec=>{
+      const part = (sec.querySelector(".cs-h b") || {}).textContent || "";
+      const imgs = [...sec.querySelectorAll("img[data-zoom]")];
+      imgs.forEach((im, i)=> im.onclick = ()=>{ list = imgs; idx = i; lockTop = main.scrollTop; vw.querySelector(".vw-part").textContent = part; fit(); main.style.overflow = "hidden"; vw.classList.add("on"); show(); });
+    });
+    vw.querySelectorAll("[data-vw]").forEach(b=> b.onclick = ()=> vw._go(+b.dataset.vw));
+    vw.querySelector("[data-vw-close]").onclick = vw._close;
+    let sx = null;
+    const stage = vw.querySelector(".vw-stage");
+    stage.addEventListener("touchstart", e=>{ sx = e.touches[0].clientX; }, {passive:true});
+    stage.addEventListener("touchend", e=>{ if (sx == null) return; const dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 50) vw._go(dx < 0 ? 1 : -1); }, {passive:true});
+    addEventListener("resize", ()=>{ if (vw.classList.contains("on")) fit(); });
+    // keep the page underneath still while the viewer is open (focusing a button must not scroll it)
+    main.addEventListener("scroll", ()=>{ if (vw.classList.contains("on") && main.scrollTop !== lockTop) main.scrollTop = lockTop; });
     const st = page.querySelectorAll(".w-status span"); st[0].textContent = `작업 ${page.querySelectorAll(".cs-fig").length}개`; st[1].style.display = "none";
     page.querySelectorAll("[data-jump]").forEach(b=> b.onclick = ()=>{ const s = page.querySelector("#"+b.dataset.jump); if (s) main.scrollTo({top: s.offsetTop - 12, behavior:"smooth"}); });
   }
@@ -2101,11 +2164,16 @@ addEventListener("popstate", e=>{
 });
 addEventListener("keydown", e=>{
   if (e.key !== "Escape" || !current) return;
-  const lbx = page.querySelector(".cs-lb.on");
-  if (lbx){ lbx.classList.remove("on"); return; }
+  const vwo = page.querySelector(".cs-vw.on");
+  if (vwo){ vwo._close(); return; }
   const v = page.querySelector(".xv:not([hidden])");
   if (v){ v.hidden = true; v.innerHTML = ""; return; }   // Esc closes the photo viewer first
   history.back();
+});
+addEventListener("keydown", e=>{      // ← → page through the open viewer
+  const v = page.querySelector(".cs-vw.on"); if (!v) return;
+  if (e.key === "ArrowLeft"){ e.preventDefault(); v._go(-1); }
+  if (e.key === "ArrowRight"){ e.preventDefault(); v._go(1); }
 });
 document.querySelectorAll("[data-go]").forEach(b=> b.onclick = ()=> openPage(b.dataset.go));
 
@@ -2154,9 +2222,16 @@ function tick(){
   const d = new Date(), hm = d.toTimeString().slice(0,5), mm = String(d.getMonth()+1).padStart(2,"0"), dd = String(d.getDate()).padStart(2,"0");
   $("tct").textContent = hm; $("tcd").textContent = `${d.getFullYear()}-${mm}-${dd}`;
   $("lt").textContent = hm; $("ld").textContent = `${d.getMonth()+1}월 ${d.getDate()}일 ${DAYS[d.getDay()]}요일`;
-  if ($("wct")){ $("wct").textContent = hm; $("wcd").textContent = `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 ${DAYS[d.getDay()]}요일`; }
+  if ($("wct")){
+    const s = d.getSeconds();
+    $("wch").textContent = hm.slice(0,2); $("wcm").textContent = hm.slice(3,5); $("wcs").textContent = String(s).padStart(2,"0");
+    $("wcc").classList.toggle("off", s % 2 === 1);          // colon blinks once a second
+    $("wcd").textContent = `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 ${DAYS[d.getDay()]}요일`;
+  }
 }
-tick(); setInterval(tick, 5000);
+tick();
+// tick exactly on each new second so the seconds and the colon stay in step with the real clock
+setTimeout(()=>{ tick(); setInterval(tick, 1000); }, 1000 - new Date().getMilliseconds());
 
 /* =====================================================================
    MUSIC — JB.fm (original player look). YouTube IFrame player, visible,
